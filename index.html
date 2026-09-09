@@ -16,6 +16,8 @@
 :root{
   --bg:#0A0E13;--panel:#121922;--panel2:#17202B;--panel3:#1D2833;
   --line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.17);
+  --sf1:rgba(255,255,255,.03);--sf2:rgba(255,255,255,.04);--sf3:rgba(255,255,255,.05);
+  --sf4:rgba(255,255,255,.08);--trak:rgba(255,255,255,.10);--sjena:0 24px 60px -30px #000;
   --tx:#ECF2F8;--tx2:#BAC7D4;--muted:#8496A6;--faint:#63768A;
   --acc:#FF3B5C;--acc-rgb:255,59,92;--acc-d:#D62348;--acc2:#FF7A4D;--acc-dim:rgba(var(--acc-rgb),.16);
   --hot:#FF3B5C;--hot-rgb:255,59,92;--nalaz-bg:linear-gradient(180deg,#1B1220,#141A22);
@@ -41,8 +43,8 @@ button{font:inherit;cursor:pointer;color:inherit;background:none;border:0;paddin
 .hero{position:relative;overflow:hidden;text-align:center;border:1px solid var(--line2);border-radius:20px;
   padding:38px 26px 30px;background:
     radial-gradient(120% 120% at 50% -20%,rgba(var(--acc-rgb),.20),transparent 58%),
-    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
-  box-shadow:0 24px 60px -30px rgba(var(--acc-rgb),.55),inset 0 1px 0 rgba(255,255,255,.07)}
+    linear-gradient(180deg,var(--sf3),rgba(255,255,255,.01));
+  box-shadow:0 24px 60px -30px rgba(var(--acc-rgb),.55),inset 0 1px 0 var(--sf4)}
 .hero.mini{padding:22px 20px 18px;border-radius:16px;
   box-shadow:0 16px 40px -32px rgba(var(--acc-rgb),.5),inset 0 1px 0 rgba(255,255,255,.06)}
 .sjaj{position:absolute;left:50%;top:-70px;width:280px;height:180px;transform:translateX(-50%);
@@ -61,7 +63,7 @@ h1{position:relative;font-family:var(--serif);font-size:64px;line-height:1;font-
 h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;letter-spacing:-.015em;text-transform:none}
 .dek{position:relative;margin:20px auto 0;color:var(--muted);font-size:14.5px;line-height:1.6;max-width:31em}
 .rez{position:relative;display:inline-flex;gap:5px;margin:22px 0 0;padding:5px;border-radius:999px;
-  background:rgba(255,255,255,.05);border:1px solid var(--line)}
+  background:var(--sf3);border:1px solid var(--line)}
 .rez button{font-size:13px;color:var(--muted);padding:9px 18px;border-radius:999px;transition:all var(--t)}
 .rez button:hover{color:var(--tx)}
 .rez button.on{color:#fff;background:linear-gradient(180deg,var(--acc),var(--acc-d));
@@ -71,7 +73,7 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 /* ---------- lampice ---------- */
 .staze{display:flex;gap:10px;margin:22px 0 0}
 .staze div{flex:1;display:flex;align-items:center;gap:8px;padding:11px 12px;border-radius:11px;
-  background:rgba(255,255,255,.03);border:1px solid var(--line);transition:all var(--t)}
+  background:var(--sf1);border:1px solid var(--line);transition:all var(--t)}
 .staze .lampa{width:9px;height:9px;border-radius:50%;background:#2B3947;flex:none;transition:all var(--t)}
 .staze .st-n{font-family:var(--mono);font-size:11px;color:var(--faint)}
 .staze .st-t{font-size:12px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -100,18 +102,18 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .pit-o{display:block;font-size:13.5px;color:var(--faint);line-height:1.6;margin:0 0 15px;max-width:34em}
 .yn{display:flex;gap:10px}
 .yn button{flex:1;border:1px solid var(--line2);color:var(--tx2);border-radius:11px;padding:13px;font-size:15px;
-  background:rgba(255,255,255,.03);transition:all var(--t)}
-.yn button:hover{background:rgba(255,255,255,.07);color:#fff}
+  background:var(--sf1);transition:all var(--t)}
+.yn button:hover{background:var(--sf4);color:#fff}
 .yn button.da.on{background:linear-gradient(180deg,var(--acc),var(--acc-d));border-color:transparent;color:#fff;
   font-weight:650;box-shadow:0 10px 24px -12px var(--acc)}
-.yn button.ne.on{background:linear-gradient(180deg,#41556B,#2A3949);border-color:#5A7089;color:#fff;font-weight:650;box-shadow:0 10px 24px -14px #000,inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px rgba(255,255,255,.10)}
+.yn button.ne.on{background:linear-gradient(180deg,#41556B,#2A3949);border-color:#5A7089;color:#fff;font-weight:650;box-shadow:0 10px 24px -14px #000,inset 0 1px 0 rgba(255,255,255,.16),0 0 0 1px var(--trak)}
 .ish{margin-top:20px;padding:14px 16px;border-radius:12px;font-size:14px;line-height:1.6}
 .ish.pass{background:var(--ok-dim);color:var(--ok);border:1px solid rgba(47,216,168,.28)}
-.ish.fail{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--line)}
+.ish.fail{background:var(--sf2);color:var(--muted);border:1px solid var(--line)}
 
 /* ---------- sažetak, sekcije ---------- */
 .sazet{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin:20px 0 24px;
-  padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}
+  padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:var(--sf1)}
 .sazet .ozn{font-size:11px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase}
 .sazet ul{margin:7px 0 0;padding-left:16px;font-size:13.5px;color:var(--tx2);line-height:1.6}
 .sazet button{color:var(--acc);font-size:13px;border-bottom:1px solid currentColor;flex:none}
@@ -152,9 +154,9 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .klz-tr{position:relative;margin:8px 0 0}
 .klz-tr input[type=range]{width:100%;-webkit-appearance:none;appearance:none;background:none;margin:0;height:30px;display:block}
 .klz-tr input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;
-  background:linear-gradient(90deg,transparent 0 var(--f,0%),rgba(255,255,255,.10) var(--f,0%) 100%),var(--fillc)}
+  background:linear-gradient(90deg,transparent 0 var(--f,0%),var(--trak) var(--f,0%) 100%),var(--fillc)}
 .klz-tr input[type=range]::-moz-range-track{height:5px;border-radius:3px;
-  background:linear-gradient(90deg,transparent 0 var(--f,0%),rgba(255,255,255,.10) var(--f,0%) 100%),var(--fillc)}
+  background:linear-gradient(90deg,transparent 0 var(--f,0%),var(--trak) var(--f,0%) 100%),var(--fillc)}
 .klz-tr input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-7.5px;
   border-radius:50%;background:#fff;border:0;box-shadow:0 2px 8px rgba(0,0,0,.5);transition:transform var(--t),box-shadow var(--t)}
 .klz.on .klz-tr input[type=range]::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(var(--acc-rgb),.22),0 0 18px 2px rgba(var(--acc-rgb),.7)}
@@ -172,7 +174,7 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .chk{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;padding:14px 0 12px;transition:opacity var(--t)}
 .chk+.chk,.klz+.chk{border-top:1px solid var(--line)}
 .chk-box{flex:none;width:21px;height:21px;border:1.5px solid var(--line2);border-radius:7px;margin-top:1px;
-  background:rgba(255,255,255,.04);transition:all var(--t)}
+  background:var(--sf2);transition:all var(--t)}
 .chk:hover .chk-box{border-color:var(--muted)}
 .chk.on .chk-box{background:linear-gradient(180deg,var(--acc),var(--acc-d));border-color:transparent;
   box-shadow:0 0 0 3px rgba(var(--acc-rgb),.16),0 0 16px rgba(var(--acc-rgb),.6);
@@ -183,8 +185,8 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .stp{padding:12px 0 2px}
 .stp-c{display:flex;align-items:center;gap:14px;margin-top:12px}
 .stp-c button{width:46px;height:46px;border:1px solid var(--line2);border-radius:13px;font-size:21px;color:var(--tx2);
-  background:rgba(255,255,255,.04);transition:all var(--t)}
-.stp-c button:hover{background:rgba(255,255,255,.1);color:#fff}
+  background:var(--sf2);transition:all var(--t)}
+.stp-c button:hover{background:var(--sf4);color:#fff}
 .stp-v{font-family:var(--mono);font-size:22px;min-width:26px;text-align:center}
 .stp.on .stp-v{color:var(--hot);text-shadow:0 0 18px rgba(var(--hot-rgb),.55)}
 .stp .st{font-size:11.5px;color:var(--faint);margin-left:auto}
@@ -212,9 +214,9 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .nalaz.yes .pravilo .znak{border-color:rgba(var(--acc-rgb),.5);color:#fff;background:var(--acc-dim)}
 .ispis-zag{display:none}
 .zbroj{margin:0 0 18px;padding-left:18px;color:var(--tx2);font-size:14px;line-height:1.75}
-.fali{margin:0 0 18px;padding:15px 17px;font-size:14px;color:var(--tx2);background:rgba(255,255,255,.04);
+.fali{margin:0 0 18px;padding:15px 17px;font-size:14px;color:var(--tx2);background:var(--sf2);
   border:1px solid var(--line);border-radius:14px;line-height:1.6}
-.rok{padding:16px 17px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);
+.rok{padding:16px 17px;border:1px solid var(--line);border-radius:14px;background:var(--sf1);
   font-size:14px;color:var(--tx2);line-height:1.65;margin-bottom:14px}
 .rok b{display:block;font-size:11px;color:var(--faint);margin-bottom:8px;font-weight:400;letter-spacing:.16em;text-transform:uppercase}
 .rok.provjera{border-color:rgba(var(--acc-rgb),.4);background:var(--acc-dim)}
@@ -223,12 +225,12 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 /* ---------- alati, primjeri, dno ---------- */
 .alati{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
 .alati button{flex:1;min-width:132px;border:1px solid var(--line2);border-radius:13px;padding:13px;font-size:14px;
-  color:var(--tx2);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;gap:9px;
+  color:var(--tx2);background:var(--sf2);display:flex;align-items:center;justify-content:center;gap:9px;
   transition:all var(--t)}
-.alati button:hover{background:rgba(255,255,255,.09);color:#fff;border-color:var(--acc)}
+.alati button:hover{background:var(--sf4);color:#fff;border-color:var(--acc)}
 .alati .ic{width:17px;height:17px;color:var(--muted)}
 .veza{display:flex;width:100%;align-items:center;gap:11px;margin-top:14px;padding:14px 16px;
-  border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);color:var(--tx2);
+  border:1px solid var(--line);border-radius:14px;background:var(--sf1);color:var(--tx2);
   font-size:14px;transition:all var(--t)}
 .veza .ic{width:18px;height:18px;color:var(--muted)}
 .veza em{margin-left:auto;font-style:normal;color:var(--faint);font-size:15px}
@@ -240,20 +242,20 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .prim-n{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
 .prim-n em{font-style:normal;font-size:12.5px;color:var(--faint)}
 .primjeri button{border:1px solid var(--line2);border-radius:999px;padding:9px 16px;font-size:13px;color:var(--tx2);
-  background:rgba(255,255,255,.04);margin:0 7px 8px 0;transition:all var(--t)}
+  background:var(--sf2);margin:0 7px 8px 0;transition:all var(--t)}
 .primjeri button:hover{border-color:var(--acc);color:#fff;box-shadow:0 8px 22px -14px var(--acc)}
 .dno{margin:38px 0 46px;padding-top:22px;border-top:1px solid var(--line2)}
 .dno-red{margin-bottom:4px}
 .dno-sitno{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;
   margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
 .dl{display:inline-flex;align-items:center;gap:9px;color:var(--tx);font-size:14px;text-decoration:none;
-  border:1px solid var(--line2);border-radius:13px;padding:12px 18px;background:rgba(255,255,255,.04);transition:all var(--t)}
+  border:1px solid var(--line2);border-radius:13px;padding:12px 18px;background:var(--sf2);transition:all var(--t)}
 .dl:hover{border-color:var(--acc);box-shadow:0 10px 26px -16px var(--acc)}
 .dl .ic{width:17px;height:17px;color:var(--muted)}
 .dl-o{display:block;margin-top:10px;font-size:12.5px;color:var(--faint);max-width:26em}
 .disclaimer{flex:1 1 340px;margin:0;font-size:11.5px;color:var(--faint);line-height:1.7;max-width:52em}
 .autor{display:inline-flex;align-items:center;gap:9px;padding:11px 15px;margin-bottom:2px;border:1px solid var(--line);
-  border-radius:12px;background:rgba(255,255,255,.03);color:var(--tx2);font-size:13.5px;
+  border-radius:12px;background:var(--sf1);color:var(--tx2);font-size:13.5px;
   text-decoration:none;transition:all var(--t);flex:none}
 .autor .ic{width:16px;height:16px;color:var(--muted)}
 .autor:hover{border-color:var(--acc);color:#fff}
@@ -282,11 +284,11 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .tocke i.on{background:var(--hot);box-shadow:0 0 10px 1px rgba(var(--hot-rgb),.75)}
 .nav{display:flex;gap:9px;align-items:center;flex:none}
 .nav .nazad{border:1px solid var(--line2);color:var(--tx2);border-radius:12px;padding:12px 16px;font-size:14px;transition:all var(--t)}
-.nav .nazad:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav .nazad:hover{background:var(--sf4);color:#fff}
 .nav .dalje{background:linear-gradient(180deg,var(--acc),var(--acc-d));color:#fff;border-radius:12px;padding:12px 22px;
   font-size:15px;font-weight:650;box-shadow:0 12px 28px -14px var(--acc);transition:all var(--t)}
 .nav .dalje:hover{box-shadow:0 14px 34px -12px var(--acc);transform:translateY(-1px)}
-.nav .dalje:disabled{background:rgba(255,255,255,.07);color:var(--faint);box-shadow:none;transform:none;cursor:default}
+.nav .dalje:disabled{background:var(--sf4);color:var(--faint);box-shadow:none;transform:none;cursor:default}
 
 /* ---------- o alatu ---------- */
 .overlay{position:fixed;inset:0;background:var(--bg);overflow-y:auto;z-index:20;padding-bottom:46px}
@@ -318,7 +320,7 @@ body[data-rezim="dora"]{
     linear-gradient(180deg,#0B1220 0%,#0A0E13 45%)}
 body[data-rezim="dora"] .hero{
   background:radial-gradient(120% 120% at 50% -20%,rgba(58,114,232,.26),transparent 58%),
-    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01))}
+    linear-gradient(180deg,var(--sf3),rgba(255,255,255,.01))}
 body[data-rezim="dora"] .sjaj{background:radial-gradient(closest-side,rgba(58,114,232,.55),transparent 72%)}
 body[data-rezim="dora"] h1{background:linear-gradient(180deg,#fff 26%,#AFC4E6 92%);
   -webkit-background-clip:text;background-clip:text}
@@ -329,6 +331,83 @@ body[data-rezim="dora"] .klz.on{--fillc:linear-gradient(90deg,var(--acc2),var(--
 body[data-rezim="dora"] .klz.on .klz-f .st{color:var(--hot)}
 body[data-rezim="dora"] .nalaz.yes .rijec{text-shadow:0 0 44px rgba(58,114,232,.85)}
 body[data-rezim="dora"] .traka .stanje b.yes{color:var(--hot);text-shadow:0 0 24px rgba(255,204,0,.5)}
+
+/* ---------- svijetla tema ---------- */
+body[data-tema="svijetla"]{
+  --bg:#F5F3EE;--panel:#FFFFFF;--panel2:#FBFAF7;--panel3:#F2EFE8;
+  --line:rgba(20,26,32,.11);--line2:rgba(20,26,32,.19);
+  --sf1:rgba(20,26,32,.025);--sf2:rgba(20,26,32,.04);--sf3:rgba(20,26,32,.05);
+  --sf4:rgba(20,26,32,.08);--trak:rgba(20,26,32,.13);
+  --tx:#161B21;--tx2:#3A444D;--muted:#606A73;--faint:#79828B;
+  --ok:#0E7A63;
+  background:
+    radial-gradient(120% 70% at 50% -10%,rgba(var(--acc-rgb),.13),transparent 62%),
+    linear-gradient(180deg,#FAF8F4 0%,#F2EFE9 45%)}
+body[data-tema="svijetla"] .hero{
+  background:radial-gradient(120% 120% at 50% -20%,rgba(var(--acc-rgb),.16),transparent 58%),#fff;
+  box-shadow:0 20px 50px -34px rgba(var(--acc-rgb),.55),0 1px 0 rgba(255,255,255,.6) inset}
+body[data-tema="svijetla"] h1{background:linear-gradient(180deg,#1B2029 22%,#4A5763 96%);
+  -webkit-background-clip:text;background-clip:text}
+body[data-tema="svijetla"] .uslov{background:linear-gradient(180deg,#1C242E,#141A20);border-color:rgba(20,26,32,.14)}
+body[data-tema="svijetla"] .staze div{background:#fff}
+body[data-tema="svijetla"] .staze .lampa{background:#D6D0C4}
+body[data-tema="svijetla"] .card,body[data-tema="svijetla"] .stp-c button{background:#fff}
+body[data-tema="svijetla"] .card:hover{box-shadow:0 10px 26px -22px #000}
+body[data-tema="svijetla"] .card.met{background:linear-gradient(180deg,rgba(var(--acc-rgb),.07),rgba(var(--acc-rgb),.02)),#fff}
+body[data-tema="svijetla"] .chk-box{background:#fff}
+body[data-tema="svijetla"] .klz{--fillc:linear-gradient(90deg,#8A97A4,#5C6975)}
+body[data-tema="svijetla"] .klz-tick{background:rgba(20,26,32,.45)}
+body[data-tema="svijetla"] .klz.on .klz-tick{background:var(--acc);box-shadow:none}
+body[data-tema="svijetla"] .klz-tr input[type=range]::-webkit-slider-thumb{box-shadow:0 1px 4px rgba(0,0,0,.28)}
+body[data-tema="svijetla"] .nalaz{background:linear-gradient(180deg,var(--ok-dim),rgba(47,216,168,.02)),#fff;
+  box-shadow:0 20px 50px -38px #000}
+body[data-tema="svijetla"] .nalaz .rijec{text-shadow:none}
+body[data-tema="svijetla"] .nalaz.yes{background:radial-gradient(120% 120% at 50% -20%,rgba(var(--acc-rgb),.35),transparent 60%),
+  linear-gradient(180deg,#2A1520,#191E26)}
+body[data-tema="svijetla"] .nalaz.yes .pod{color:#C9D2DB}
+body[data-tema="svijetla"] .fali,body[data-tema="svijetla"] .rok,body[data-tema="svijetla"] .sazet,
+body[data-tema="svijetla"] .primjeri,body[data-tema="svijetla"] .veza,body[data-tema="svijetla"] .dl,
+body[data-tema="svijetla"] .autor,body[data-tema="svijetla"] .alati button,
+body[data-tema="svijetla"] .primjeri button{background:#fff}
+body[data-tema="svijetla"] .tocke i{background:#D6D0C4}
+body[data-tema="svijetla"] .overlay{background:var(--bg)}
+body[data-tema="svijetla"] .zatvori{background:linear-gradient(var(--bg) 72%,transparent)}
+body[data-tema="svijetla"] .overlay h2,body[data-tema="svijetla"] .overlay h3{color:var(--tx)}
+body[data-tema="svijetla"] .tbl tr:hover td{background:rgba(var(--acc-rgb),.05)}
+
+/* tamni elementi zadržavaju svijetli tekst i u svijetloj temi */
+body[data-tema="svijetla"] .uslov h2{color:#F5F2EC}
+body[data-tema="svijetla"] .uslov .oznaka{color:var(--acc-lt,#FF8098)}
+body[data-tema="svijetla"] .pit{border-top-color:rgba(255,255,255,.11)}
+body[data-tema="svijetla"] .pit-h,body[data-tema="svijetla"] .pit-n{color:#8E99A5}
+body[data-tema="svijetla"] .pit-t{color:#E9EEF3}
+body[data-tema="svijetla"] .pit-t b{color:#fff}
+body[data-tema="svijetla"] .pit-o{color:#98A3AF}
+body[data-tema="svijetla"] .yn button{color:#C6D0DA;border-color:rgba(255,255,255,.20);
+  background:rgba(255,255,255,.06)}
+body[data-tema="svijetla"] .yn button:hover{background:rgba(255,255,255,.12);color:#fff}
+body[data-tema="svijetla"] .yn button.da.on{color:#fff}
+body[data-tema="svijetla"] .ish{border-top-color:rgba(255,255,255,.11)}
+body[data-tema="svijetla"] .ish.pass{color:#7FD3BF;background:rgba(47,216,168,.15);
+  border-color:rgba(47,216,168,.3)}
+body[data-tema="svijetla"] .ish.fail{color:#A6B0BB;background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.14)}
+body[data-tema="svijetla"] .traka{background:rgba(16,21,27,.95)}
+body[data-tema="svijetla"] .traka .stanje{color:#96A3AF}
+body[data-tema="svijetla"] .traka .stanje b{color:#EDF2F7}
+body[data-tema="svijetla"] .nav .nazad{color:#C6D0DA;border-color:rgba(255,255,255,.24)}
+body[data-tema="svijetla"] .nav .nazad:hover{background:rgba(255,255,255,.12);color:#fff}
+body[data-tema="svijetla"] .nav .dalje:disabled{background:rgba(255,255,255,.12);color:#8B96A2}
+body[data-tema="svijetla"] .tocke i{background:#39434E}
+body[data-tema="svijetla"] .tost{color:#C6D0DA;background:linear-gradient(180deg,#222B36,#1A222B)}
+body[data-tema="svijetla"] .uslov .uvod{color:#A6B0BB}
+
+/* prekidač teme */
+.tema{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;
+  border:1px solid var(--line);background:var(--sf2);color:var(--muted);margin-left:10px;transition:all var(--t)}
+.tema:hover{color:var(--tx);border-color:var(--line2)}
+.tema .ic{width:17px;height:17px}
+.rez-red{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
 
 @media (min-width:900px){
   .wrap{max-width:980px}
@@ -429,6 +508,7 @@ bs:{
   faliDva:"Trebaju dva kriterija. Najbliži je „{k}”, fali {g}.",
   naPragu:"„{k}” je tačno na pragu, a propis traži strogo više.",
   prov5bN:"Provjeri ovo",
+  tema:"Svijetla ili tamna tema",
   tostPodaci:"Označio si uspješan zlonamjeran pristup, a nijedan prag pod „Podaci” nije uključen. Razmisli može li taj pristup dovesti do gubitka podataka — taj prag sam po sebi znači prijavu. Ako ostaje kako jest, klikni „Nalaz” još jednom.",
   prov5b:"Rekao si da je neko uspješno i zlonamjerno ušao, ali nisi označio da taj pristup može dovesti do gubitka podataka. Time tvrdiš da gubitak nije moguć. Ako jeste, taj prag sam po sebi znači da se prijavljuje.",
   ispis:"Ispis",
@@ -527,6 +607,7 @@ en:{
   faliDva:"Two criteria are needed. The closest is “{k}”, short by {g}.",
   naPragu:"“{k}” sits exactly on the threshold, and the rule asks for strictly more.",
   prov5bN:"Worth a second look",
+  tema:"Light or dark theme",
   tostPodaci:"You marked a successful malicious access, but no threshold under \u201cData\u201d is ticked. Consider whether that access may result in data losses \u2014 that threshold alone means the incident is reportable. If it stays as it is, hit \u201cResult\u201d again.",
   prov5b:"You said someone got in successfully and maliciously, but you did not tick that the access may result in data losses. That claims such losses are impossible. If they are possible, that threshold alone means the incident is reportable.",
   ispis:"Print",
@@ -631,6 +712,8 @@ const IKONE={
  iznova:'<path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20.2 4.2v4.2H16"/>',
  preuzimanje:'<path d="M12 4v11"/><path d="M7.8 11 12 15.2 16.2 11"/><path d="M4.5 19.5h15"/>',
  ispis:'<path d="M7 9V4h10v5"/><rect x="4.5" y="9" width="15" height="7" rx="2"/><path d="M7 14h10v6H7z"/>',
+ sunce:'<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/>',
+ mjesec:'<path d="M20 13.6A8.2 8.2 0 0 1 10.4 4a8.2 8.2 0 1 0 9.6 9.6z"/>',
  vanjski:'<path d="M14 4h6v6"/><path d="M20 4 10.5 13.5"/><path d="M18 14.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4.5"/>',
  info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11.2v5"/><circle cx="12" cy="8.2" r=".9" fill="currentColor" stroke="none"/>'
 };
@@ -663,6 +746,8 @@ function prazno(){
        podaciA:false,podaciB:false}};
 }
 let S=prazno(), korak=1;
+/* tema prati postavku sistema, a prekidač je mijenja za tekuću posjetu */
+let tema=(()=>{try{return matchMedia("(prefers-color-scheme: light)").matches?"svijetla":"tamna";}catch(_){return "tamna";}})();
 /* #eu ili #fbih u adresi bira okvir; ništa se ne pohranjuje */
 const izHesa=()=>{try{
   const h=(location.hash||"").toLowerCase();
@@ -813,7 +898,9 @@ function korak1(){
     '<h1>'+esc(t.naslov)+'</h1><p class="nas-post">'+esc(t.naslovPost)+'</p>'+
     '<p class="dek">'+esc(t.dek)+'</p><div class="rez">';
   Object.keys(REZIMI).forEach(k=>{h+='<button type="button" data-rez="'+k+'" class="'+(S.rezim===k?"on":"")+'">'+REZIMI[k].oznaka+'</button>';});
-  h+='</div></div><p class="privatno">'+esc(t.priv)+'</p>'+staze();
+  h+='<button type="button" class="tema" data-tema aria-label="'+esc(t.tema)+'" title="'+esc(t.tema)+'">'+
+      ikona(tema==="svijetla"?"mjesec":"sunce")+'</button>'+
+    '</div></div><p class="privatno">'+esc(t.priv)+'</p>'+staze();
   h+='<section class="uslov"><p class="oznaka">'+esc(t.prvi)+'</p><h2>'+esc(t.uslovNaslov)+'</h2>'+
     '<p class="uvod">'+t.uslovUvod+'</p>';
   const ikPit=["sistem","banka","stit"];
@@ -920,6 +1007,7 @@ function crtaj(){
   const t=T(),o=ocijeni();
   document.documentElement.lang=t.htmlLang;
   document.body.dataset.rezim=S.rezim;
+  document.body.dataset.tema=tema;
   document.title=t.naslovStr;
   const dno='<footer class="dno">'+
       '<div class="dno-red"><a class="dl" href="'+FAJL+'" download="'+FAJL_SNIMI+'">'+ikona("preuzimanje")+
@@ -1148,6 +1236,7 @@ document.addEventListener("click",e=>{
   if(!t)return;
   if(t.dataset.zatvori!==undefined){document.getElementById("o-alatu").style.display="none";return;}
   if(t.dataset.o!==undefined)return crtajOAlatu();
+  if(t.dataset.tema!==undefined){tema=tema==="svijetla"?"tamna":"svijetla";return crtaj();}
   if(t.dataset.rez){
     S.rezim=t.dataset.rez;
     try{history.replaceState(null,"",(location.pathname||"")+(location.search||"")+(S.rezim==="dora"?"#eu":"#fbih"));}catch(_){}
