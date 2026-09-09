@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
+<!-- trijaza-ikt v1.0 · 2026-09-09 · (c) Emir Ramić · lični projekat · sva prava zadržana -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">
 <meta name="referrer" content="no-referrer">
-<title>Značajan ili nije? · trijaža IKT incidenta</title>
-<meta name="description" content="Samoprocjena je li IKT incident kandidat za prijavu: pragovi značajnosti po propisu u FBiH i po DORA-i. Radi lokalno, ništa se ne pamti.">
+<title>Je li incident značajan za prijavu? · trijaža</title>
+<meta name="description" content="Procjena značajnosti IKT incidenta i obaveze prijave regulatoru, po propisu u FBiH i po DORA-i. Radi lokalno, ništa se ne pamti.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Značajan ili nije? — trijaža IKT incidenta">
-<meta property="og:description" content="Dva koraka: ključne usluge, pa pragovi značajnosti. FBiH i DORA. Bez baze, bez mreže.">
+<meta property="og:title" content="Je li incident značajan za prijavu?">
+<meta property="og:description" content="Procjena značajnosti i obaveze prijave regulatoru. Dva koraka: ključne usluge, pa pragovi. FBiH i DORA. Bez baze, bez mreže.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0E13'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23FF3B5C'/%3E%3C/svg%3E">
 <style>
@@ -68,7 +69,36 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .rez button:hover{color:var(--tx)}
 .rez button.on{color:#fff;background:linear-gradient(180deg,var(--acc),var(--acc-d));
   box-shadow:0 6px 18px -8px var(--acc),inset 0 1px 0 rgba(255,255,255,.25)}
-.privatno{margin:16px 0 0;font-size:12px;color:var(--faint);line-height:1.6;text-align:center}
+.privatno{display:inline-flex;align-items:center;gap:9px;margin:18px auto 0;padding:9px 15px;border-radius:999px;
+  border:1px solid var(--line);background:var(--sf1);font-size:12px;color:var(--muted);line-height:1.5;
+  text-align:left;max-width:min(100%,34em)}
+.privatno .ic{width:15px;height:15px;color:var(--ok);flex:none}
+.privatno-red{display:flex;justify-content:center}
+
+.nacini{position:relative;display:inline-flex;gap:4px;margin:20px 0 0;padding:4px;border-radius:999px;
+  background:var(--sf2);border:1px solid var(--line)}
+.nacini button{font-size:13px;color:var(--muted);padding:9px 18px;border-radius:999px;transition:all var(--t)}
+.nacini button:hover{color:var(--tx)}
+.nacini button.on{background:var(--panel3);color:var(--tx);box-shadow:inset 0 0 0 1px var(--line2)}
+.pit-p{margin:2px 0 14px;font-size:14.5px;color:var(--tx2);line-height:1.55}
+.pit-p b{font-weight:640;color:var(--tx)}
+.yn-svijetli button{border-color:var(--line2);color:var(--tx2);background:var(--sf2)}
+.yn-svijetli button:hover{background:var(--sf4);color:var(--tx)}
+.yn-svijetli button.da.on{background:linear-gradient(180deg,var(--acc),var(--acc-d));border-color:transparent;color:#fff}
+.yn-svijetli button.ne.on{background:var(--panel3);border-color:var(--line2);color:var(--tx)}
+.tipke{margin:18px 0 0;font-size:12px;color:var(--faint)}
+.uBrowseru{display:flex;align-items:flex-start;gap:9px;margin:0 0 16px;padding:12px 15px;border-radius:12px;
+  border:1px solid rgba(47,216,168,.28);background:var(--ok-dim);font-size:12.5px;color:var(--ok);line-height:1.55}
+.uBrowseru .ic{width:16px;height:16px;flex:none;margin-top:1px}
+.uporedi-b{display:flex;width:100%;align-items:center;justify-content:center;gap:10px;padding:13px;
+  border:1px solid var(--line2);border-radius:13px;background:var(--sf2);color:var(--tx2);font-size:14px;
+  margin-bottom:12px;transition:all var(--t)}
+.uporedi-b:hover{border-color:var(--acc);color:#fff}
+.uporedi-b .ic{width:17px;height:17px;color:var(--muted)}
+.uporedba{border:1px solid var(--line);border-radius:16px;padding:6px 18px 14px;margin-bottom:14px;background:var(--sf1)}
+.uporedba .tbl td b.da{color:var(--acc);font-weight:600}
+.uporedba .tbl td b.ne{color:var(--ok);font-weight:600}
+.uporedba-n{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
 
 /* ---------- lampice ---------- */
 .staze{display:flex;gap:10px;margin:22px 0 0}
@@ -85,6 +115,7 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
   animation:puls 2.4s ease-in-out infinite}
 .staze .sad .st-n{color:var(--acc)}
 .staze .sad .st-t{color:var(--tx)}
+@keyframes ulaz{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes puls{0%,100%{box-shadow:0 0 0 3px rgba(var(--acc-rgb),.18),0 0 12px 1px rgba(var(--acc-rgb),.65)}
   50%{box-shadow:0 0 0 5px rgba(var(--acc-rgb),.10),0 0 20px 4px rgba(var(--acc-rgb),.95)}}
 
@@ -115,7 +146,13 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .sazet{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin:20px 0 24px;
   padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:var(--sf1)}
 .sazet .ozn{font-size:11px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase}
-.sazet ul{margin:7px 0 0;padding-left:16px;font-size:13.5px;color:var(--tx2);line-height:1.6}
+.cipovi{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.cip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:12.5px;
+  color:var(--tx2);background:rgba(var(--acc-rgb),.10);border:1px solid rgba(var(--acc-rgb),.32)}
+.cip:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--acc);flex:none;
+  box-shadow:0 0 8px 1px rgba(var(--acc-rgb),.8)}
+.cip.prazan{background:var(--sf2);border-color:var(--line);color:var(--muted)}
+.cip.prazan:before{background:var(--faint);box-shadow:none}
 .sazet button{color:var(--acc);font-size:13px;border-bottom:1px solid currentColor;flex:none}
 .sekcija{margin:0 0 20px}
 .sekcija .oznaka{margin:0 0 6px;font-size:11.5px;color:var(--acc);letter-spacing:.16em;text-transform:uppercase}
@@ -133,18 +170,24 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .card.met{border-color:rgba(var(--acc-rgb),.42);
   background:linear-gradient(180deg,rgba(var(--acc-rgb),.10),rgba(var(--acc-rgb),.02)),var(--panel);
   box-shadow:0 18px 40px -28px var(--acc)}
-.card-h{display:flex;align-items:center;gap:11px;margin-bottom:6px}
-.card-h .ic{color:var(--faint);transition:color var(--t)}
-.card.met .card-h .ic{color:var(--acc)}
-.card-h .br{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
-.card.met .card-h .br{color:var(--acc)}
-.card-h h3{font-size:15.5px;font-weight:620;margin:0;letter-spacing:-.01em}
+.card-h{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.plocica{position:relative;flex:none;width:38px;height:38px;border-radius:12px;background:var(--sf2);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+.plocica .ic{width:19px;height:19px;color:var(--muted);transition:color var(--t)}
+.plocica i{position:absolute;top:-6px;left:-6px;min-width:17px;height:17px;border-radius:9px;background:var(--panel3);
+  border:1px solid var(--line);color:var(--faint);font-style:normal;font-family:var(--mono);font-size:10px;
+  display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+.card.met .plocica{background:rgba(var(--acc-rgb),.14);border-color:rgba(var(--acc-rgb),.42);
+  box-shadow:0 0 22px -8px rgba(var(--acc-rgb),.9)}
+.card.met .plocica .ic{color:var(--acc)}
+.card.met .plocica i{background:var(--acc);border-color:transparent;color:#fff}
+.card-h h3{font-size:16px;font-weight:640;margin:0;letter-spacing:-.012em}
 .card-h .stanje{margin-left:auto;font-size:11px;color:var(--faint);letter-spacing:.04em;
   border:1px solid var(--line);border-radius:999px;padding:4px 10px;transition:all var(--t)}
 .card.met .card-h .stanje{color:var(--acc);border-color:rgba(var(--acc-rgb),.4);background:var(--acc-dim)}
 
 /* ---------- klizači ---------- */
-.klz{padding:15px 0 4px;--fillc:linear-gradient(90deg,#5C6E80,#8FA3B5)}
+.klz{padding:17px 0 6px;--fillc:linear-gradient(90deg,#4E5F70,#7E92A4)}
 .klz.on{--fillc:linear-gradient(90deg,var(--acc2),var(--acc))}
 .klz-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .klz-n{font-size:14.5px;color:var(--tx2)}
@@ -167,12 +210,12 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .klz.on .klz-tick{background:#fff;box-shadow:0 0 10px rgba(255,255,255,.6)}
 .klz-tick:after{content:attr(data-p);position:absolute;top:14px;left:50%;transform:translateX(-50%);
   font-size:10px;color:var(--faint);white-space:nowrap;font-family:var(--mono)}
-.klz-f{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--faint);margin-top:13px}
+.klz-f{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--faint);margin-top:15px}
 .klz.on .klz-f .st{color:var(--acc)}
 
 /* ---------- kvačice, stepper ---------- */
 .chk{display:flex;gap:13px;align-items:flex-start;width:100%;text-align:left;padding:14px 0 12px;transition:opacity var(--t)}
-.chk+.chk,.klz+.chk{border-top:1px solid var(--line)}
+.klz+.klz,.chk+.chk,.klz+.chk{border-top:1px solid var(--line)}
 .chk-box{flex:none;width:21px;height:21px;border:1.5px solid var(--line2);border-radius:7px;margin-top:1px;
   background:var(--sf2);transition:all var(--t)}
 .chk:hover .chk-box{border-color:var(--muted)}
@@ -194,7 +237,7 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .uslovno{font-size:13px;color:var(--faint);line-height:1.6;padding:14px 0 2px;border-top:1px solid var(--line);max-width:34em}
 
 /* ---------- nalaz ---------- */
-.nalaz{position:relative;overflow:hidden;margin:6px 0 18px;padding:28px 24px 24px;border-radius:20px;
+.nalaz{position:relative;overflow:hidden;margin:6px 0 18px;animation:ulaz .35s cubic-bezier(.2,.7,.3,1);padding:28px 24px 24px;border-radius:20px;
   border:1px solid rgba(47,216,168,.35);background:linear-gradient(180deg,var(--ok-dim),rgba(47,216,168,.03)),var(--panel);
   box-shadow:0 24px 60px -34px rgba(47,216,168,.6)}
 .nalaz.yes{border-color:rgba(var(--acc-rgb),.45);
@@ -237,8 +280,7 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .veza:hover{border-color:var(--acc);color:#fff;background:rgba(var(--acc-rgb),.08)}
 .veza:hover .ic,.veza:hover em{color:var(--acc)}
 .podnozje{color:var(--faint);font-size:12.5px;line-height:1.65;margin:18px 0 0;max-width:36em}
-.primjeri{margin:22px 0 0;padding:16px 17px 10px;border:1px solid var(--line);border-radius:16px;
-  background:rgba(255,255,255,.02)}
+.primjeri{margin:22px 0 0;padding:17px 18px 11px;border:1px solid var(--line);border-radius:16px;background:var(--sf1)}
 .prim-n{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
 .prim-n em{font-style:normal;font-size:12.5px;color:var(--faint)}
 .primjeri button{border:1px solid var(--line2);border-radius:999px;padding:9px 16px;font-size:13px;color:var(--tx2);
@@ -253,7 +295,7 @@ h1.mali{font-size:27px;line-height:1.18;margin:8px 0 0;padding-bottom:.12em;lett
 .dl:hover{border-color:var(--acc);box-shadow:0 10px 26px -16px var(--acc)}
 .dl .ic{width:17px;height:17px;color:var(--muted)}
 .dl-o{display:block;margin-top:10px;font-size:12.5px;color:var(--faint);max-width:26em}
-.disclaimer{flex:1 1 340px;margin:0;font-size:11.5px;color:var(--faint);line-height:1.7;max-width:52em}
+.disclaimer{flex:1 1 320px;margin:0;font-size:10.5px;color:var(--faint);opacity:.85;line-height:1.65;max-width:54em}
 .autor{display:inline-flex;align-items:center;gap:9px;padding:11px 15px;margin-bottom:2px;border:1px solid var(--line);
   border-radius:12px;background:var(--sf1);color:var(--tx2);font-size:13.5px;
   text-decoration:none;transition:all var(--t);flex:none}
@@ -332,82 +374,6 @@ body[data-rezim="dora"] .klz.on .klz-f .st{color:var(--hot)}
 body[data-rezim="dora"] .nalaz.yes .rijec{text-shadow:0 0 44px rgba(58,114,232,.85)}
 body[data-rezim="dora"] .traka .stanje b.yes{color:var(--hot);text-shadow:0 0 24px rgba(255,204,0,.5)}
 
-/* ---------- svijetla tema ---------- */
-body[data-tema="svijetla"]{
-  --bg:#F5F3EE;--panel:#FFFFFF;--panel2:#FBFAF7;--panel3:#F2EFE8;
-  --line:rgba(20,26,32,.11);--line2:rgba(20,26,32,.19);
-  --sf1:rgba(20,26,32,.025);--sf2:rgba(20,26,32,.04);--sf3:rgba(20,26,32,.05);
-  --sf4:rgba(20,26,32,.08);--trak:rgba(20,26,32,.13);
-  --tx:#161B21;--tx2:#3A444D;--muted:#606A73;--faint:#79828B;
-  --ok:#0E7A63;
-  background:
-    radial-gradient(120% 70% at 50% -10%,rgba(var(--acc-rgb),.13),transparent 62%),
-    linear-gradient(180deg,#FAF8F4 0%,#F2EFE9 45%)}
-body[data-tema="svijetla"] .hero{
-  background:radial-gradient(120% 120% at 50% -20%,rgba(var(--acc-rgb),.16),transparent 58%),#fff;
-  box-shadow:0 20px 50px -34px rgba(var(--acc-rgb),.55),0 1px 0 rgba(255,255,255,.6) inset}
-body[data-tema="svijetla"] h1{background:linear-gradient(180deg,#1B2029 22%,#4A5763 96%);
-  -webkit-background-clip:text;background-clip:text}
-body[data-tema="svijetla"] .uslov{background:linear-gradient(180deg,#1C242E,#141A20);border-color:rgba(20,26,32,.14)}
-body[data-tema="svijetla"] .staze div{background:#fff}
-body[data-tema="svijetla"] .staze .lampa{background:#D6D0C4}
-body[data-tema="svijetla"] .card,body[data-tema="svijetla"] .stp-c button{background:#fff}
-body[data-tema="svijetla"] .card:hover{box-shadow:0 10px 26px -22px #000}
-body[data-tema="svijetla"] .card.met{background:linear-gradient(180deg,rgba(var(--acc-rgb),.07),rgba(var(--acc-rgb),.02)),#fff}
-body[data-tema="svijetla"] .chk-box{background:#fff}
-body[data-tema="svijetla"] .klz{--fillc:linear-gradient(90deg,#8A97A4,#5C6975)}
-body[data-tema="svijetla"] .klz-tick{background:rgba(20,26,32,.45)}
-body[data-tema="svijetla"] .klz.on .klz-tick{background:var(--acc);box-shadow:none}
-body[data-tema="svijetla"] .klz-tr input[type=range]::-webkit-slider-thumb{box-shadow:0 1px 4px rgba(0,0,0,.28)}
-body[data-tema="svijetla"] .nalaz{background:linear-gradient(180deg,var(--ok-dim),rgba(47,216,168,.02)),#fff;
-  box-shadow:0 20px 50px -38px #000}
-body[data-tema="svijetla"] .nalaz .rijec{text-shadow:none}
-body[data-tema="svijetla"] .nalaz.yes{background:radial-gradient(120% 120% at 50% -20%,rgba(var(--acc-rgb),.35),transparent 60%),
-  linear-gradient(180deg,#2A1520,#191E26)}
-body[data-tema="svijetla"] .nalaz.yes .pod{color:#C9D2DB}
-body[data-tema="svijetla"] .fali,body[data-tema="svijetla"] .rok,body[data-tema="svijetla"] .sazet,
-body[data-tema="svijetla"] .primjeri,body[data-tema="svijetla"] .veza,body[data-tema="svijetla"] .dl,
-body[data-tema="svijetla"] .autor,body[data-tema="svijetla"] .alati button,
-body[data-tema="svijetla"] .primjeri button{background:#fff}
-body[data-tema="svijetla"] .tocke i{background:#D6D0C4}
-body[data-tema="svijetla"] .overlay{background:var(--bg)}
-body[data-tema="svijetla"] .zatvori{background:linear-gradient(var(--bg) 72%,transparent)}
-body[data-tema="svijetla"] .overlay h2,body[data-tema="svijetla"] .overlay h3{color:var(--tx)}
-body[data-tema="svijetla"] .tbl tr:hover td{background:rgba(var(--acc-rgb),.05)}
-
-/* tamni elementi zadržavaju svijetli tekst i u svijetloj temi */
-body[data-tema="svijetla"] .uslov h2{color:#F5F2EC}
-body[data-tema="svijetla"] .uslov .oznaka{color:var(--acc-lt,#FF8098)}
-body[data-tema="svijetla"] .pit{border-top-color:rgba(255,255,255,.11)}
-body[data-tema="svijetla"] .pit-h,body[data-tema="svijetla"] .pit-n{color:#8E99A5}
-body[data-tema="svijetla"] .pit-t{color:#E9EEF3}
-body[data-tema="svijetla"] .pit-t b{color:#fff}
-body[data-tema="svijetla"] .pit-o{color:#98A3AF}
-body[data-tema="svijetla"] .yn button{color:#C6D0DA;border-color:rgba(255,255,255,.20);
-  background:rgba(255,255,255,.06)}
-body[data-tema="svijetla"] .yn button:hover{background:rgba(255,255,255,.12);color:#fff}
-body[data-tema="svijetla"] .yn button.da.on{color:#fff}
-body[data-tema="svijetla"] .ish{border-top-color:rgba(255,255,255,.11)}
-body[data-tema="svijetla"] .ish.pass{color:#7FD3BF;background:rgba(47,216,168,.15);
-  border-color:rgba(47,216,168,.3)}
-body[data-tema="svijetla"] .ish.fail{color:#A6B0BB;background:rgba(255,255,255,.06);
-  border-color:rgba(255,255,255,.14)}
-body[data-tema="svijetla"] .traka{background:rgba(16,21,27,.95)}
-body[data-tema="svijetla"] .traka .stanje{color:#96A3AF}
-body[data-tema="svijetla"] .traka .stanje b{color:#EDF2F7}
-body[data-tema="svijetla"] .nav .nazad{color:#C6D0DA;border-color:rgba(255,255,255,.24)}
-body[data-tema="svijetla"] .nav .nazad:hover{background:rgba(255,255,255,.12);color:#fff}
-body[data-tema="svijetla"] .nav .dalje:disabled{background:rgba(255,255,255,.12);color:#8B96A2}
-body[data-tema="svijetla"] .tocke i{background:#39434E}
-body[data-tema="svijetla"] .tost{color:#C6D0DA;background:linear-gradient(180deg,#222B36,#1A222B)}
-body[data-tema="svijetla"] .uslov .uvod{color:#A6B0BB}
-
-/* prekidač teme */
-.tema{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;
-  border:1px solid var(--line);background:var(--sf2);color:var(--muted);margin-left:10px;transition:all var(--t)}
-.tema:hover{color:var(--tx);border-color:var(--line2)}
-.tema .ic{width:17px;height:17px}
-.rez-red{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
 
 @media (min-width:900px){
   .wrap{max-width:980px}
@@ -490,9 +456,9 @@ const PRIMJERI=[
 ];
 const PRAG={klijentiPct:10,partneriPct:30,txBrojPct:10,txVrijPct:10,trajanjeSati:24,prekidSati:2,drzave:2};
 const OPSEG={
-  klijentiPct:{max:100,step:.5}, klijentiBroj:{log:true,vmin:1000,max:1000000},
+  klijentiPct:{max:100,step:.5}, klijentiBroj:{log:true,vmin:1,max:1000000},
   partneriPct:{max:100,step:1}, txBrojPct:{max:100,step:1}, txVrijPct:{max:100,step:1},
-  trajanjeH:{max:72,step:1}, prekidH:{max:12,step:.5}, iznos:{log:true,vmin:1000,max:5000000}
+  trajanjeH:{max:72,step:1}, prekidH:{max:12,step:.5}, iznos:{log:true,vmin:1,max:5000000}
 };
 
 /* ------------------------------ tekstovi -------------------------- */
@@ -501,20 +467,53 @@ bs:{
   htmlLang:"bs", naslovStr:"Je li incident značajan za prijavu? · trijaža",
   eyebrow:"IKT incident", naslov:"INCIDENT", naslovPost:"Procjena značajnosti i obaveze prijave regulatoru",
   dek:"Dva koraka: ključne usluge, pa pragovi.",
-  priv:"Ništa se ne pamti i ništa ne ide s uređaja. Osvježiš stranicu i sve je obrisano.",
+  priv:"Ništa se ne pamti i ništa ne ide s uređaja. Osvježiš stranicu i sve je obrisano — za razliku od incidenta.",
   koraci:["Ključne usluge","Pragovi","Nalaz"],
-  primjeriN:"Ili probaj gotov primjer", primjeriO:"izmišljeni slučajevi, samo za vježbu",
+  koraciP:["Uslovi","Posljedica","Nalaz"],
+  pNaslov1:"Domet i vjerovatnoća", pNaslov2:"Šta bi bilo ako se ostvari?",
+  pSaz:"Uslovi A i B", pSazNe:"nisu ispunjena oba uslova",
+  pTipke:"Tipke 1 i 2 mijenjaju odgovore, 3 relevantnost. Enter vodi dalje.",
+  pTrakaOdg:"odgovori na oba uslova",
+  primjeriN:"Ili probaj gotov primjer", primjeriO:"izmišljeni; svaka sličnost sa stvarnim incidentom je slučajna",
   faliJedan:"Još jedan kriterij i ishod se mijenja. Najbliži je „{k}”, fali {g}.",
   faliDva:"Trebaju dva kriterija. Najbliži je „{k}”, fali {g}.",
   naPragu:"„{k}” je tačno na pragu, a propis traži strogo više.",
   prov5bN:"Provjeri ovo",
-  tema:"Svijetla ili tamna tema",
   tostPodaci:"Označio si uspješan zlonamjeran pristup, a nijedan prag pod „Podaci” nije uključen. Razmisli može li taj pristup dovesti do gubitka podataka — taj prag sam po sebi znači prijavu. Ako ostaje kako jest, klikni „Nalaz” još jednom.",
   prov5b:"Rekao si da je neko uspješno i zlonamjerno ušao, ali nisi označio da taj pristup može dovesti do gubitka podataka. Time tvrdiš da gubitak nije moguć. Ako jeste, taj prag sam po sebi znači da se prijavljuje.",
   ispis:"Ispis",
   disclaimer:"Lični projekat, napravljen kao pomoć i u edukativne svrhe. Ne predstavlja stav ni proizvod bilo koje institucije, ne daje pravni savjet i ne garantuje tačnost ni potpunost. Mjerodavni su izvorni tekstovi propisa, a odgovornost za klasifikaciju ostaje na subjektu koji je primjenjuje.",
   autor:"Emir Ramić · LinkedIn",
-  preuzmi:"Preuzmi i koristi offline", preuzmiO:"jedan fajl; otvoriš ga duplim klikom i radi bez mreže",
+  preuzmi:"Preuzmi i koristi aplikaciju offline", preuzmiO:"jedan fajl; otvoriš ga duplim klikom i radi bez mreže",
+  nacinI:"Incident", nacinP:"Cyber prijetnja",
+  pNaslov:"Je li prijetnja ozbiljna?",
+  pUvod:"Sva tri uslova moraju biti ispunjena zajedno. Prva dva su prosudba, treći se veže na iste pragove kao kod incidenta.",
+  pA:"Domet", pAt:"Ako se ostvari, prijetnja bi mogla utjecati na <b>prioritetne funkcije</b> banke, ili na druge finansijske subjekte, treće strane pružaoce usluga, klijente ili partnere.",
+  pB:"Vjerovatnoća", pBt:"Realno je da se prijetnja <b>ostvari</b> kod banke ili kod drugih finansijskih subjekata.",
+  pBo:"Pri procjeni se uzimaju u obzir barem ranjivosti koje se mogu iskoristiti, sposobnosti i namjere aktera prijetnje koliko su poznate, te postojanost prijetnje i saznanja o incidentima koji su pogodili banku, njene pružaoce usluga, klijente ili partnere.",
+  pC:"Posljedica", pCt:"Ako se ostvari, prijetnja bi dosegnula bar jedno od sljedećeg:",
+  pC1:"Ključne usluge", pC1o:"pogodila bi uslugu koja podržava prioritetnu funkciju, licenciranu uslugu ili bi značila uspješan zlonamjeran pristup",
+  pC2:"Klijenti, partneri ili transakcije", pC2o:"dosegnula bi prag iz prvog kriterija",
+  pC3:"Geografska rasprostranjenost", pC3o:"dvije ili više država",
+  pCn:"Ako procijeniš da bi bili dosegnuti i pragovi ugleda, trajanja, gubitka podataka ili iznosa, i njih možeš uzeti u obzir.",
+  pOzbiljna:"Ozbiljna cyber prijetnja", pNije:"Nije ozbiljna prijetnja",
+  pRel:"Relevantnost", pRelt:"Prijetnja je <b>relevantna</b> za finansijski sektor, korisnike usluga ili klijente.",
+  pRelo:"O ovoj procjeni ovisi obaveza prema nadzornom organu, a donosi je banka.",
+  pNaslovObaveza:"Obavijestiti Agenciju", pNaslovDobro:"Obavijest je dobrovoljna",
+  pNaslovPrati:"Pratiti, bez prijave",
+  pDobrovoljno:"Prijetnja je ozbiljna. Obavještavanje nadzornog organa nije obavezno, nego je izbor subjekta kad prijetnju smatra relevantnom.",
+  pOzbiljnaNerel:"Prijetnja je ozbiljna po kriterijima, ali je nisi ocijenio relevantnom za sektor, korisnike ni klijente. Obaveza prijave time ne nastaje; prijetnja se prati i evidentira, a ocjena se mijenja čim se okolnosti promijene.",
+  pKlijenti:"Ako je primjenjivo, potencijalno ugrožene klijente treba pravovremeno obavijestiti i dati im informacije o zaštitnim mjerama.",
+  pObaveza:"Banka je dužna odmah po saznanju obavijestiti Agenciju, jer je prijetnja ocijenjena kao relevantna.",
+  pNema:"Nema obaveze obavještavanja. Prijetnja se svejedno prati i evidentira, jer se okolnosti mijenjaju brzo.",
+  pPravilo1:"nisu ispunjena sva tri uslova",
+  pPravilo2:"sva tri uslova ispunjena",
+  pTraka:"uslova ispunjeno",
+  uporedi:"Uporedi oba okvira", uporediZ:"Zatvori poređenje",
+  uporediIsti:"Ishod je isti u oba okvira.", uporediRazlika:"Ishod se razlikuje.",
+  link:"Kopiraj link", linkOk:"Link kopiran", slika:"Sačuvaj sliku",
+  izracunato:"Izračunato u tvom pregledniku za {ms} ms. Nijedan podatak nije poslan nikuda.",
+  tipke:"Tipke 1, 2 i 3 mijenjaju odgovore. Enter vodi dalje.",
   prvi:"Prvi uslov", drugi:"Drugi uslov",
   uslovNaslov:"Jesu li pogođene ključne usluge?",
   uslovUvod:"Bez ijednog „da” ovdje incident nije značajan, koliko god pragova bilo prekoračeno.",
@@ -553,7 +552,7 @@ bs:{
   k5a:"Podaci su narušeni", k5aO:"dostupnost, integritet, autentičnost ili povjerljivost, s posljedicom po ciljeve ili obaveze",
   k5b:"Pristup može dovesti do gubitka podataka", k5bO:"ovo samo po sebi znači da se prijavljuje",
   k5note:"Ovaj prag ide uz utvrđen zlonamjeran pristup, a na treće pitanje si odgovorio „ne”.",
-  k6:"Novac u {v}", k6a:"Troškovi i gubici", k6P:"prag: preko {i}, stvarni ili očekivani",
+  k6:"Iznos u {v}", k6a:"Troškovi i gubici", k6P:"prag: preko {i}, stvarni ili očekivani",
   nalazNaslov:"Nalaz", okvir:"Okvir",
   prijaviti:"Prijaviti Agenciji", nePrijavljuje:"Ne prijavljuje se",
   znacajan:"Značajan IKT incident", nijeZnacajan:"Nije značajan IKT incident",
@@ -600,20 +599,53 @@ en:{
   htmlLang:"en", naslovStr:"Is this incident reportable? · triage",
   eyebrow:"ICT incident", naslov:"INCIDENT", naslovPost:"Materiality and the duty to report to the authority",
   dek:"Two steps: critical services, then the thresholds.",
-  priv:"Nothing is saved and nothing leaves the device. Refresh the page and it is all gone.",
+  priv:"Nothing is saved and nothing leaves the device. Refresh the page and it is all gone — unlike the incident.",
   koraci:["Critical services","Thresholds","Result"],
-  primjeriN:"Or try a ready-made example", primjeriO:"fictional cases, for practice only",
+  koraciP:["Conditions","Consequence","Result"],
+  pNaslov1:"Reach and likelihood", pNaslov2:"What if it materialises?",
+  pSaz:"Conditions A and B", pSazNe:"both conditions are not met",
+  pTipke:"Keys 1 and 2 change the answers, 3 sets relevance. Enter moves on.",
+  pTrakaOdg:"answer both conditions",
+  primjeriN:"Or try a ready-made example", primjeriO:"fictional; any resemblance to a real incident is coincidental",
   faliJedan:"One more criterion and the outcome flips. The closest is “{k}”, short by {g}.",
   faliDva:"Two criteria are needed. The closest is “{k}”, short by {g}.",
   naPragu:"“{k}” sits exactly on the threshold, and the rule asks for strictly more.",
   prov5bN:"Worth a second look",
-  tema:"Light or dark theme",
   tostPodaci:"You marked a successful malicious access, but no threshold under \u201cData\u201d is ticked. Consider whether that access may result in data losses \u2014 that threshold alone means the incident is reportable. If it stays as it is, hit \u201cResult\u201d again.",
   prov5b:"You said someone got in successfully and maliciously, but you did not tick that the access may result in data losses. That claims such losses are impossible. If they are possible, that threshold alone means the incident is reportable.",
   ispis:"Print",
   disclaimer:"A personal project, built as a helper and for educational purposes. It represents no institution\u2019s position or product, is not legal advice, and gives no guarantee of accuracy or completeness. The original legal texts prevail and the classification remains the responsibility of the entity applying them.",
   autor:"Emir Ramić · LinkedIn",
-  preuzmi:"Download and use offline", preuzmiO:"a single file; open it with a double click and it runs without a network",
+  preuzmi:"Download and use the app offline", preuzmiO:"a single file; open it with a double click and it runs without a network",
+  nacinI:"Incident", nacinP:"Cyber threat",
+  pNaslov:"Is the threat significant?",
+  pUvod:"All three conditions must hold together. The first two are judgement; the third ties back to the same thresholds as an incident.",
+  pA:"Reach", pAt:"If realised, the threat could affect <b>critical or important functions</b>, or other financial entities, third-party providers, clients or counterparts.",
+  pB:"Likelihood", pBt:"The threat could <b>plausibly be realised</b> at the entity or at other financial entities.",
+  pBo:"The assessment considers at least the exploitable vulnerabilities, the capability and intent of the threat actors as far as they are known, and the persistence of the threat together with knowledge of incidents affecting the entity, its providers, clients or counterparts.",
+  pC:"Consequence", pCt:"If realised, the threat would meet at least one of the following:",
+  pC1:"Critical services", pC1o:"it would hit a service supporting a critical or important function, an authorised service, or amount to successful malicious access",
+  pC2:"Clients, counterparts or transactions", pC2o:"it would reach the first criterion threshold",
+  pC3:"Geographical spread", pC3o:"two or more Member States",
+  pCn:"If you judge that the reputational, duration, data-loss or economic thresholds would also be reached, those may be considered too.",
+  pOzbiljna:"Significant cyber threat", pNije:"Not a significant threat",
+  pRel:"Relevance", pRelt:"The threat is <b>relevant</b> to the financial system, service users or clients.",
+  pRelo:"This judgement drives what follows towards the authority, and the entity makes it.",
+  pNaslovObaveza:"Notify the authority", pNaslovDobro:"Notification is voluntary",
+  pNaslovPrati:"Track it, no notification",
+  pDobrovoljno:"The threat is significant. Notifying the competent authority is not mandatory; it is the entity\u2019s choice where it deems the threat relevant.",
+  pOzbiljnaNerel:"The threat is significant against the criteria, but you did not judge it relevant to the financial system, service users or clients. No notification duty arises; the threat is tracked and recorded, and the assessment changes as soon as circumstances do.",
+  pKlijenti:"Where applicable, potentially affected clients should be informed in good time and given information on appropriate protection measures.",
+  pObaveza:"The entity notifies the competent authority immediately.",
+  pNema:"No notification is expected. The threat is still tracked and recorded, because the picture changes quickly.",
+  pPravilo1:"the three conditions are not all met",
+  pPravilo2:"all three conditions are met",
+  pTraka:"conditions met",
+  uporedi:"Compare both frameworks", uporediZ:"Close comparison",
+  uporediIsti:"The outcome is the same under both frameworks.", uporediRazlika:"The outcomes differ.",
+  link:"Copy link", linkOk:"Link copied", slika:"Save image",
+  izracunato:"Computed in your browser in {ms} ms. No data was sent anywhere.",
+  tipke:"Keys 1, 2 and 3 change the answers. Enter moves on.",
   prvi:"First condition", drugi:"Second condition",
   uslovNaslov:"Are critical services affected?",
   uslovUvod:"Without a single yes here the incident is not major, no matter how many thresholds it crosses.",
@@ -652,7 +684,7 @@ en:{
   k5a:"Data compromised", k5aO:"availability, integrity, authenticity or confidentiality, with an adverse impact on objectives or duties",
   k5b:"The access may result in data losses", k5bO:"this alone means the incident is reportable",
   k5note:"This threshold goes with an identified malicious access, and you answered no to the third question.",
-  k6:"Money in {v}", k6a:"Costs and losses", k6P:"threshold: over {i}, actual or expected",
+  k6:"Amount in {v}", k6a:"Costs and losses", k6P:"threshold: over {i}, actual or expected",
   nalazNaslov:"Result", okvir:"Framework",
   prijaviti:"Report to the competent authority", nePrijavljuje:"Not reportable",
   znacajan:"Major ICT-related incident", nijeZnacajan:"Not a major ICT-related incident",
@@ -712,8 +744,8 @@ const IKONE={
  iznova:'<path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20.2 4.2v4.2H16"/>',
  preuzimanje:'<path d="M12 4v11"/><path d="M7.8 11 12 15.2 16.2 11"/><path d="M4.5 19.5h15"/>',
  ispis:'<path d="M7 9V4h10v5"/><rect x="4.5" y="9" width="15" height="7" rx="2"/><path d="M7 14h10v6H7z"/>',
- sunce:'<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/>',
- mjesec:'<path d="M20 13.6A8.2 8.2 0 0 1 10.4 4a8.2 8.2 0 1 0 9.6 9.6z"/>',
+ slikaIk:'<rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10.5" r="1.8"/><path d="M4.5 17.5 9.5 13l3.5 3 2.5-2.2 4 3.7"/>',
+ katanac:'<rect x="4.5" y="10.5" width="15" height="9.5" rx="2.2"/><path d="M8.2 10.5V7.8a3.8 3.8 0 0 1 7.6 0v2.7"/><circle cx="12" cy="15.2" r="1.1" fill="currentColor" stroke="none"/>',
  vanjski:'<path d="M14 4h6v6"/><path d="M20 4 10.5 13.5"/><path d="M18 14.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4.5"/>',
  info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11.2v5"/><circle cx="12" cy="8.2" r=".9" fill="currentColor" stroke="none"/>'
 };
@@ -723,7 +755,10 @@ const ikona=(n,kl)=>'<svg class="ic '+(kl||"")+'" viewBox="0 0 24 24" aria-hidde
 const num=v=>{const n=parseFloat(v);return isFinite(n)&&n>=0?n:null;};
 /* logaritamska skala: gusto oko praga, a doseže do milion */
 const POZ=1000;
-const zaokruzi=v=>{const k=v<10000?100:v<100000?500:v<1000000?1000:10000;return Math.round(v/k)*k;};
+const zaokruzi=v=>{
+  const k=v<20?1:v<100?1:v<1000?5:v<10000?50:v<100000?500:v<1000000?1000:10000;
+  return Math.max(1,Math.round(v/k)*k);
+};
 function uPoziciju(v,o){
   if(!o.log)return v===null?0:Math.min(v,o.max);
   if(v===null||v<=0)return 0;
@@ -743,17 +778,58 @@ function prazno(){
     v:{klijentiPct:"",klijentiBroj:"",partneriPct:"",txBrojPct:"",txVrijPct:"",
        trajanjeH:"",prekidH:"",drzave:"",iznos:""},
     m:{relevantni:false,mediji:false,prituzbe:false,regulatorni:false,gubitakKlijenata:false,
-       podaciA:false,podaciB:false}};
+       podaciA:false,podaciB:false},
+    pr:{a:null,b:null,c1:false,c2:false,c3:false,rel:null}};
 }
-let S=prazno(), korak=1;
-/* tema prati postavku sistema, a prekidač je mijenja za tekuću posjetu */
-let tema=(()=>{try{return matchMedia("(prefers-color-scheme: light)").matches?"svijetla":"tamna";}catch(_){return "tamna";}})();
+let S=prazno(), korak=1, nacin="incident", uporediOtvoren=false, msIzracun=0;
 /* #eu ili #fbih u adresi bira okvir; ništa se ne pohranjuje */
+/* cijela procjena se može spakovati u adresu; podaci putuju samo ako ti pošalješ link */
+const B=v=>v===true?"1":v===false?"0":"-";
+const izB=c=>c==="1"?true:c==="0"?false:null;
+function uHash(){
+  const g=S.gate,m=S.m,r=S.pr,v=S.v;
+  return "#"+[
+    (S.rezim==="dora"?"eu":"fbih"),
+    (nacin==="prijetnja"?"p":"i"),
+    B(g.prioritetna)+B(g.licencirana)+B(g.pristup),
+    [v.klijentiPct,v.klijentiBroj,v.partneriPct,v.txBrojPct,v.txVrijPct,v.trajanjeH,v.prekidH,v.drzave,v.iznos].join(","),
+    [m.relevantni,m.mediji,m.prituzbe,m.regulatorni,m.gubitakKlijenata,m.podaciA,m.podaciB].map(x=>x?"1":"0").join(""),
+    B(r.a)+B(r.b)+(r.c1?"1":"0")+(r.c2?"1":"0")+(r.c3?"1":"0")+B(r.rel),
+    String(korak)
+  ].join("~");
+}
+function izHash(){
+  try{
+    const h=decodeURIComponent(location.hash||"");
+    if(!h)return false;
+    const d=h.slice(1).split("~");
+    if(d.length<7)return false;
+    S.rezim=d[0]==="eu"?"dora":"fba";
+    nacin=d[1]==="p"?"prijetnja":"incident";
+    S.gate.prioritetna=izB(d[2][0]); S.gate.licencirana=izB(d[2][1]); S.gate.pristup=izB(d[2][2]);
+    const v=d[3].split(","),kl=["klijentiPct","klijentiBroj","partneriPct","txBrojPct","txVrijPct","trajanjeH","prekidH","drzave","iznos"];
+    kl.forEach((k,i)=>{const x=(v[i]||"").trim(); S.v[k]=/^\d*\.?\d*$/.test(x)?x:"";});
+    const mk=["relevantni","mediji","prituzbe","regulatorni","gubitakKlijenata","podaciA","podaciB"];
+    mk.forEach((k,i)=>{S.m[k]=d[4][i]==="1";});
+    S.pr.a=izB(d[5][0]); S.pr.b=izB(d[5][1]);
+    S.pr.c1=d[5][2]==="1"; S.pr.c2=d[5][3]==="1"; S.pr.c3=d[5][4]==="1"; S.pr.rel=izB(d[5][5]);
+    korak=Math.min(3,Math.max(1,Number(d[6])||1));
+    return true;
+  }catch(_){ return false; }
+}
+let hashTajmer=null;
+function osvjeziHash(){
+  clearTimeout(hashTajmer);
+  hashTajmer=setTimeout(()=>{try{
+    history.replaceState(null,"",(location.pathname||"")+(location.search||"")+uHash());
+  }catch(_){}} ,250);
+}
+
 const izHesa=()=>{try{
   const h=(location.hash||"").toLowerCase();
   return h==="#eu"||h==="#dora"?"dora":(h==="#fbih"||h==="#fba"?"fba":null);
 }catch(_){return null;}};
-S.rezim=izHesa()||S.rezim;
+if(!izHash())S.rezim=izHesa()||S.rezim;
 const R=()=>REZIMI[S.rezim];
 const T=()=>TXT[R().jezik];
 const pop=(s,o)=>String(s).replace(/\{(\w+)\}/g,(_,k)=>o[k]!==undefined?o[k]:"{"+k+"}");
@@ -770,8 +846,8 @@ const prekidVrijedi=()=>S.gate.prioritetna===true;
 const pristupVrijedi=()=>S.gate.pristup===true;
 
 /* ------------------------------ ocjena ---------------------------- */
-function ocijeni(){
-  const r=R(),t=T(),V=k=>num(S.v[k]),preko=(k,p)=>V(k)!==null&&V(k)>p,m=S.m,d=(u,x)=>u?[x]:[];
+function ocijeni(rezimP){
+  const r=rezimP?REZIMI[rezimP]:R(),t=T(),V=k=>num(S.v[k]),preko=(k,p)=>V(k)!==null&&V(k)>p,m=S.m,d=(u,x)=>u?[x]:[];
   const razlozi=[];
   if(S.gate.prioritetna)razlozi.push(t.rz[0]);
   if(S.gate.licencirana)razlozi.push(t.rz[1]);
@@ -850,6 +926,29 @@ function najblizi(){
   return pop(o.broj>=1?t.faliJedan:t.faliDva,{k:n.ime,g:n.fmt(n.gap)});
 }
 
+/* --------------------------- cyber prijetnja ---------------------------
+   Ozbiljna je samo ako su ispunjena sva tri uslova zajedno.            */
+function ocijeniPrijetnju(rezimP){
+  const t=T(),r=S.pr,dobrovoljno=(rezimP||S.rezim)==="dora";
+  const c=!!(r.c1||r.c2||r.c3);
+  const ozbiljna=r.a===true&&r.b===true&&c;
+  const odgovoreno=r.a!==null&&r.b!==null;
+  let broj=0; if(r.a===true)broj++; if(r.b===true)broj++; if(c)broj++;
+  /* ozbiljnost je klasifikacija; obaveza prema organu je zasebno pitanje:
+     u FBiH dužnost uz procjenu relevantnosti, u EU dobrovoljna obavijest */
+  const obaveza = ozbiljna && !dobrovoljno && r.rel===true;
+  const preporuka = ozbiljna && dobrovoljno && r.rel===true;
+  let ishod, opis;
+  if(!ozbiljna){ ishod="nije"; opis=t.pNema; }
+  else if(dobrovoljno){ ishod=preporuka?"dobrovoljno":"prati"; opis=preporuka?t.pDobrovoljno:t.pOzbiljnaNerel; }
+  else { ishod=obaveza?"obaveza":"prati"; opis=obaveza?t.pObaveza:t.pOzbiljnaNerel; }
+  return {ozbiljna:ozbiljna,broj:broj,c:c,odgovoreno:odgovoreno,obaveza:obaveza,
+    dobrovoljno:dobrovoljno,ishod:ishod,opis:opis,
+    naslov: ishod==="obaveza"?t.pNaslovObaveza : ishod==="dobrovoljno"?t.pNaslovDobro :
+            ishod==="prati"?t.pNaslovPrati : t.pNije,
+    pravilo:ozbiljna?t.pPravilo2:t.pPravilo1};
+}
+
 /* ------------------------------ elementi -------------------------- */
 function yn(put,val){
   const t=T();
@@ -875,11 +974,12 @@ function klizac(o){
 }
 function kartica(br,ik,naslov,met,unutra){
   const t=T();
-  return '<div class="card'+(met?" met":"")+'"><div class="card-h">'+ikona(ik)+'<span class="br">'+br+'</span>'+
+  return '<div class="card'+(met?" met":"")+'"><div class="card-h">'+
+    '<span class="plocica">'+ikona(ik)+'<i>'+br+'</i></span>'+
     '<h3>'+esc(naslov)+'</h3><span class="stanje">'+(met?t.dosegnut:t.nijeDosegnut)+'</span></div>'+unutra+'</div>';
 }
 function staze(){
-  const im=T().koraci;
+  const im=nacin==="prijetnja"?T().koraciP:T().koraci;
   return '<div class="staze">'+im.map((x,i)=>
     '<div class="'+(korak===i+1?"sad":(korak>i+1?"gotov":""))+'">'+
       '<i class="lampa"></i><span class="st-n">0'+(i+1)+'</span><span class="st-t">'+esc(x)+'</span></div>'
@@ -887,20 +987,18 @@ function staze(){
 }
 
 /* ------------------------------- koraci --------------------------- */
-function vezaKako(t){
-  return '<button type="button" class="veza" data-o>'+ikona("info")+
-    '<span>'+esc(t.kako)+'</span><em aria-hidden="true">→</em></button>';
-}
-
 function korak1(){
   const t=T(),o=ocijeni();
   let h='<div class="hero"><span class="sjaj"></span>'+
     '<h1>'+esc(t.naslov)+'</h1><p class="nas-post">'+esc(t.naslovPost)+'</p>'+
-    '<p class="dek">'+esc(t.dek)+'</p><div class="rez">';
+    '<p class="dek">'+esc(t.dek)+'</p>'+
+    '<div class="nacini">'+
+      '<button type="button" data-nacin="incident" class="'+(nacin==="incident"?"on":"")+'">'+esc(t.nacinI)+'</button>'+
+      '<button type="button" data-nacin="prijetnja" class="'+(nacin==="prijetnja"?"on":"")+'">'+esc(t.nacinP)+'</button>'+
+    '</div><div class="rez">';
   Object.keys(REZIMI).forEach(k=>{h+='<button type="button" data-rez="'+k+'" class="'+(S.rezim===k?"on":"")+'">'+REZIMI[k].oznaka+'</button>';});
-  h+='<button type="button" class="tema" data-tema aria-label="'+esc(t.tema)+'" title="'+esc(t.tema)+'">'+
-      ikona(tema==="svijetla"?"mjesec":"sunce")+'</button>'+
-    '</div></div><p class="privatno">'+esc(t.priv)+'</p>'+staze();
+  h+='</div></div>'+
+    '<div class="privatno-red"><p class="privatno">'+ikona("katanac")+'<span>'+esc(t.priv)+'</span></p></div>'+staze();
   h+='<section class="uslov"><p class="oznaka">'+esc(t.prvi)+'</p><h2>'+esc(t.uslovNaslov)+'</h2>'+
     '<p class="uvod">'+t.uslovUvod+'</p>';
   const ikPit=["sistem","banka","stit"];
@@ -915,7 +1013,6 @@ function korak1(){
   h+='<div class="primjeri"><p class="prim-n">'+esc(t.primjeriN)+' <em>'+esc(t.primjeriO)+'</em></p>';
   PRIMJERI.forEach((x,i)=>{h+='<button type="button" data-primjer="'+i+'">'+esc(x.ime[R().jezik])+'</button>';});
   h+='</div>';
-  h+=vezaKako(t);
   return h;
 }
 
@@ -923,7 +1020,9 @@ function korak2(){
   const r=R(),t=T(),o=ocijeni();
   let h='<div class="hero mini"><p class="eyebrow">'+esc(t.eyebrow)+'</p><h1 class="mali">'+esc(t.pragoviNaslov)+'</h1></div>'+staze();
   h+='<div class="sazet"><div><span class="ozn">'+esc(t.sazOzn)+'</span>'+
-    (o.kapija?'<ul>'+o.razlozi.map(x=>"<li>"+esc(x)+"</li>").join("")+'</ul>':'<ul><li>'+esc(t.sazNema)+'</li></ul>')+
+    '<div class="cipovi">'+(o.kapija
+      ? o.razlozi.map(x=>'<span class="cip">'+esc(x)+'</span>').join("")
+      : '<span class="cip prazan">'+esc(t.sazNema)+'</span>')+'</div>'+
     '</div><button type="button" data-nazad>'+esc(t.izmijeni)+'</button></div>';
   if(o.samostalan)h+='<div class="kratko"><b>'+esc(t.kratkoB)+'</b><span>'+esc(t.kratkoS)+'</span></div>';
   h+='<div class="sekcija"><p class="oznaka">'+esc(t.drugi)+'</p><p>'+esc(t.pragoviUvod)+'</p></div>';
@@ -969,9 +1068,124 @@ function korak2(){
     klizac(Object.assign({put:"iznos",naslov:t.k6a,pragVal:r.ekonomski,prikaz:fmtNovac,
       pragTekst:pop(t.k6P,{i:fmtNovac(r.ekonomski)})},OPSEG.iznos)));
 
-  h+='</div>'+vezaKako(t);
+  h+='</div>';
   return h;
 }
+
+function pKorak1(){
+  const t=T(),pr=S.pr,oba=pr.a!==null&&pr.b!==null;
+  let h='<div class="hero"><span class="sjaj"></span>'+
+    '<h1>'+esc(t.naslov)+'</h1><p class="nas-post">'+esc(t.pNaslov)+'</p>'+
+    '<p class="dek">'+esc(t.pUvod)+'</p>'+
+    '<div class="nacini">'+
+      '<button type="button" data-nacin="incident" class="">'+esc(t.nacinI)+'</button>'+
+      '<button type="button" data-nacin="prijetnja" class="on">'+esc(t.nacinP)+'</button>'+
+    '</div><div class="rez">';
+  Object.keys(REZIMI).forEach(k=>{h+='<button type="button" data-rez="'+k+'" class="'+(S.rezim===k?"on":"")+'">'+REZIMI[k].oznaka+'</button>';});
+  h+='</div></div>'+
+    '<div class="privatno-red"><p class="privatno">'+ikona("katanac")+'<span>'+esc(t.priv)+'</span></p></div>'+staze();
+
+  h+='<section class="uslov"><p class="oznaka">'+esc(t.prvi)+'</p><h2>'+esc(t.pNaslov1)+'</h2>'+
+    '<p class="uvod">'+esc(t.pUvod)+'</p>';
+  h+='<div class="pit"><span class="pit-h">'+ikona("stit")+'<span class="pit-n">A</span></span>'+
+    '<span class="pit-t">'+t.pAt+'</span><span class="pit-o">'+esc(t.pA)+'</span>'+yn("pr.a",pr.a)+'</div>';
+  h+='<div class="pit"><span class="pit-h">'+ikona("sat")+'<span class="pit-n">B</span></span>'+
+    '<span class="pit-t">'+t.pBt+'</span><span class="pit-o">'+esc(t.pBo)+'</span>'+yn("pr.b",pr.b)+'</div>';
+  if(oba){
+    const proslo=pr.a===true&&pr.b===true;
+    h+='<div class="ish '+(proslo?"pass":"fail")+'">'+esc(proslo?t.ishPass:t.pSazNe)+'</div>';
+  }
+  h+='<p class="tipke">'+esc(t.pTipke)+'</p></section>';
+  return h;
+}
+
+function pKorak2(){
+  const t=T(),pr=S.pr,o=ocijeniPrijetnju();
+  let h='<div class="hero mini"><p class="eyebrow">'+esc(t.nacinP)+'</p>'+
+    '<h1 class="mali">'+esc(t.pNaslov2)+'</h1></div>'+staze();
+  const ab=pr.a===true&&pr.b===true;
+  h+='<div class="sazet"><div><span class="ozn">'+esc(t.pSaz)+'</span>'+
+    '<div class="cipovi">'+(ab
+      ? '<span class="cip">'+esc(t.pA)+'</span><span class="cip">'+esc(t.pB)+'</span>'
+      : '<span class="cip prazan">'+esc(t.pSazNe)+'</span>')+'</div>'+
+    '</div><button type="button" data-nazad>'+esc(t.izmijeni)+'</button></div>';
+
+  h+='<div class="sekcija"><p class="oznaka">'+esc(t.drugi)+'</p><p>'+esc(t.pCt)+'</p></div>';
+  h+=kartica("C","globus",t.pC,o.c,
+    chk("pr.c1",pr.c1,t.pC1,t.pC1o)+chk("pr.c2",pr.c2,t.pC2,t.pC2o)+chk("pr.c3",pr.c3,t.pC3,t.pC3o)+
+    '<p class="uslovno">'+esc(t.pCn)+'</p>');
+  h+=kartica("D","ljudi",t.pRel,pr.rel===true,
+    '<p class="pit-p">'+t.pRelt+'</p>'+ynSvijetli("pr.rel",pr.rel)+
+    '<p class="uslovno">'+esc(t.pRelo)+'</p>');
+  return h;
+}
+
+function pKorak3(){
+  const t=T(),r=R(),o=ocijeniPrijetnju();
+  const tip=(o.ishod==="obaveza"||o.ishod==="dobrovoljno")?"yes":"no";
+  let h='<div class="hero mini"><p class="eyebrow">'+esc(t.nacinP)+'</p>'+
+    '<h1 class="mali">'+esc(t.nalazNaslov)+'</h1></div>'+staze();
+  h+='<div class="nalaz '+tip+'"><p class="oznaka">'+esc(t.okvir)+' '+esc(r.oznaka)+'</p>'+
+    ikona(tip==="yes"?"alarm":"kvaka","ic-big")+
+    '<span class="rijec">'+esc(o.naslov)+'</span>'+
+    '<span class="pod">'+esc(o.opis)+'</span>'+
+    '<div class="pravilo"><span class="znak">'+o.broj+'/3</span><span>'+esc(o.pravilo)+'</span></div></div>';
+
+  const st=[];
+  if(S.pr.a===true)st.push(t.pA+": "+ocistiOznake(t.pAt));
+  if(S.pr.b===true)st.push(t.pB+": "+ocistiOznake(t.pBt));
+  if(S.pr.c1)st.push(t.pC+": "+t.pC1);
+  if(S.pr.c2)st.push(t.pC+": "+t.pC2);
+  if(S.pr.c3)st.push(t.pC+": "+t.pC3);
+  if(S.pr.rel===true)st.push(t.pRel+": "+ocistiOznake(t.pRelt));
+  if(st.length)h+='<ul class="zbroj">'+st.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>';
+
+  if(o.ozbiljna)h+='<div class="rok"><b>'+esc(R().jezik==="bs"?"Klijenti":"Clients")+'</b>'+esc(t.pKlijenti)+'</div>';
+  h+='<p class="uBrowseru">'+ikona("katanac")+'<span>'+esc(pop(t.izracunato,{ms:msIzracun.toFixed(1).replace(".",R().jezik==="bs"?",":".")}))+'</span></p>';
+  h+='<button type="button" class="uporedi-b" data-uporedi>'+ikona("globus")+'<span>'+esc(uporediOtvoren?t.uporediZ:t.uporedi)+'</span></button>';
+  if(uporediOtvoren)h+=tabelaPoredjenjaP();
+  h+='<div class="alati"><button type="button" data-kopiraj>'+ikona("kopija")+'<span>'+esc(t.kopiraj)+'</span></button>'+
+    '<button type="button" data-link>'+ikona("vanjski")+'<span>'+esc(t.link)+'</span></button>'+
+    '<button type="button" data-slika>'+ikona("slikaIk")+'<span>'+esc(t.slika)+'</span></button>'+
+    '<button type="button" data-reset>'+ikona("iznova")+'<span>'+esc(t.nova)+'</span></button>'+
+    '<button type="button" data-o>'+ikona("info")+'<span>'+esc(t.kako)+'</span></button></div>'+
+    '<p class="podnozje">'+esc(t.podnozje)+'</p>';
+  return h;
+}
+
+const ocistiOznake=x=>String(x).replace(/<[^>]+>/g,"");
+
+function tabelaPoredjenjaP(){
+  const t=T(),a=ocijeniPrijetnju("fba"),b=ocijeniPrijetnju("dora");
+  const red=(ime,x,y)=>'<tr><td>'+ime+'</td><td>'+x+'</td><td>'+y+'</td></tr>';
+  const rj=o=>'<b class="'+((o.ishod==="obaveza"||o.ishod==="dobrovoljno")?"da":"ne")+'">'+esc(o.naslov)+'</b>';
+  return '<div class="uporedba"><table class="tbl">'+
+    '<tr><th></th><th>'+REZIMI.fba.oznaka+'</th><th>'+REZIMI.dora.oznaka+'</th></tr>'+
+    red(esc(t.nalazNaslov),rj(a),rj(b))+
+    red(esc(t.pTraka),a.broj+"/3",b.broj+"/3")+
+    '</table><p class="uporedba-n">'+esc(a.ishod===b.ishod?t.uporediIsti:t.uporediRazlika)+'</p></div>';
+}
+
+function ynSvijetli(put,val){
+  const bs=R().jezik==="bs";
+  return '<div class="yn yn-svijetli" data-yn="'+put+'">'+
+    '<button type="button" class="da'+(val===true?" on":"")+'" aria-pressed="'+(val===true)+'" data-val="1">'+(bs?"Da":"Yes")+'</button>'+
+    '<button type="button" class="ne'+(val===false?" on":"")+'" aria-pressed="'+(val===false)+'" data-val="0">'+(bs?"Ne":"No")+'</button></div>';
+}
+
+function tabelaPoredjenja(){
+  const t=T(),a=ocijeni("fba"),b=ocijeni("dora");
+  const red=(ime,x,y)=>'<tr><td>'+ime+'</td><td>'+x+'</td><td>'+y+'</td></tr>';
+  const rijec=o=>o.znacajan?'<b class="da">'+esc(t.prijaviti)+'</b>':'<b class="ne">'+esc(t.nePrijavljuje)+'</b>';
+  return '<div class="uporedba"><table class="tbl">'+
+    '<tr><th></th><th>'+REZIMI.fba.oznaka+'</th><th>'+REZIMI.dora.oznaka+'</th></tr>'+
+    red(esc(t.nalazNaslov),rijec(a),rijec(b))+
+    red(esc(t.drugi),a.broj+"/6",b.broj+"/6")+
+    red(esc(t.k1b),fmtBrU(REZIMI.fba.klijentiBroj,"fba"),fmtBrU(REZIMI.dora.klijentiBroj,"dora"))+
+    red(esc(t.k6a),fmtBrU(REZIMI.fba.ekonomski,"fba")+" KM","EUR "+fmtBrU(REZIMI.dora.ekonomski,"dora"))+
+    '</table><p class="uporedba-n">'+esc(a.znacajan===b.znacajan?t.uporediIsti:t.uporediRazlika)+'</p></div>';
+}
+const fmtBrU=(n,r)=>n.toLocaleString(REZIMI[r].locale);
 
 function korak3(){
   const r=R(),t=T(),o=ocijeni();
@@ -994,7 +1208,12 @@ function korak3(){
   h+=o.znacajan
     ? '<div class="rok"><b>'+esc(t.rokoviB)+'</b>'+t.rokovi+t.rokoviVikend+'</div>'
     : '<div class="rok tiho"><b>'+esc(t.ostajeB)+'</b>'+esc(t.ostaje)+'</div>';
+  h+='<p class="uBrowseru">'+ikona("katanac")+'<span>'+esc(pop(t.izracunato,{ms:msIzracun.toFixed(1).replace(".",R().jezik==="bs"?",":".")}))+'</span></p>';
+  h+='<button type="button" class="uporedi-b" data-uporedi>'+ikona("globus")+'<span>'+esc(uporediOtvoren?t.uporediZ:t.uporedi)+'</span></button>';
+  if(uporediOtvoren)h+=tabelaPoredjenja();
   h+='<div class="alati"><button type="button" data-kopiraj>'+ikona("kopija")+'<span>'+esc(t.kopiraj)+'</span></button>'+
+    '<button type="button" data-link>'+ikona("vanjski")+'<span>'+esc(t.link)+'</span></button>'+
+    '<button type="button" data-slika>'+ikona("slikaIk")+'<span>'+esc(t.slika)+'</span></button>'+
     '<button type="button" data-reset>'+ikona("iznova")+'<span>'+esc(t.nova)+'</span></button>'+
     '<button type="button" data-o>'+ikona("info")+'<span>'+esc(t.kako)+'</span></button>'+
     '<button type="button" data-ispis>'+ikona("ispis")+'<span>'+esc(t.ispis)+'</span></button></div>'+
@@ -1007,7 +1226,6 @@ function crtaj(){
   const t=T(),o=ocijeni();
   document.documentElement.lang=t.htmlLang;
   document.body.dataset.rezim=S.rezim;
-  document.body.dataset.tema=tema;
   document.title=t.naslovStr;
   const dno='<footer class="dno">'+
       '<div class="dno-red"><a class="dl" href="'+FAJL+'" download="'+FAJL_SNIMI+'">'+ikona("preuzimanje")+
@@ -1017,13 +1235,32 @@ function crtaj(){
         '<a class="autor" href="'+LINKEDIN+'" target="_blank" rel="noreferrer noopener">'+
         ikona("vanjski")+'<span>'+esc(t.autor)+'</span></a></div>'+
     '</footer>';
-  document.getElementById("app").innerHTML=(korak===1?korak1():(korak===2?korak2():korak3()))+dno;
+  const t0=(typeof performance!=="undefined"&&performance.now)?performance.now():0;
+  const sadrzaj = nacin==="prijetnja"
+    ? (korak===1?pKorak1():(korak===2?pKorak2():pKorak3()+dno))
+    : (korak===1?korak1():(korak===2?korak2():korak3()+dno));
+  msIzracun=((typeof performance!=="undefined"&&performance.now)?performance.now():0)-t0;
+  document.getElementById("app").innerHTML=sadrzaj;
+  osvjeziHash();
   crtajTraku(o);
 }
 
 function crtajTraku(o){
   const t=T();
   let x="";
+  if(nacin==="prijetnja"){
+    const q=ocijeniPrijetnju(), oba=S.pr.a!==null&&S.pr.b!==null;
+    const tipT=(q.ishod==="obaveza"||q.ishod==="dobrovoljno")?"yes":"no";
+    const stanje=(korak===1&&!oba)
+      ? '<span class="stanje">'+esc(t.pTrakaOdg)+'</span>'
+      : '<span class="stanje"><b class="'+tipT+'">'+esc(q.naslov)+'</b>'+q.broj+' / 3 '+esc(t.pTraka)+'</span>';
+    let nav='<span class="nav">';
+    if(korak>1)nav+='<button type="button" class="nazad" data-nazad>'+esc(t.nazad)+'</button>';
+    if(korak<3)nav+='<button type="button" class="dalje" data-dalje '+((korak===1&&!oba)?"disabled":"")+'>'+
+      esc(korak===2?t.naNalaz:t.dalje)+'</button>';
+    nav+='</span>';
+    document.getElementById("traka").innerHTML=stanje+nav; return;
+  }
   if(korak===1){
     x='<span class="stanje">'+esc(o.odgovorena?(o.kapija?t.trPass:t.trFail):t.trOdgovori)+'</span>'+
       '<span class="nav"><button type="button" class="dalje" data-dalje '+(o.odgovorena?"":"disabled")+'>'+
@@ -1095,6 +1332,14 @@ function crtajOAlatu(){
     '<p>Incident se i tada evidentira, jer banka vodi evidenciju svih IKT incidenata. Incidenti s istim očitim osnovnim uzrokom koji se ponove najmanje dva puta u šest mjeseci i kumulativno ispune kriterije tretiraju se kao jedan značajan incident, a ta se procjena radi svakog mjeseca. Odvojeno treba razmotriti obavještavanje drugih organa u BiH, na primjer kod povrede ličnih podataka.</p>'+
     '<p class="izvor">čl. 10 st. 2 i 3 Uputstva · Odluka čl. 41 st. 3 i čl. 44 st. 6</p>'+
 
+    '<h3>Cyber prijetnje</h3>'+
+    '<p>Prijetnja se smatra ozbiljnom samo ako su ispunjena sva tri uslova zajedno: da bi, ako se ostvari, mogla utjecati na prioritetne funkcije ili na druge subjekte, treće strane, klijente i partnere; da je realno da se ostvari, uz procjenu ranjivosti, sposobnosti i namjera aktera i postojanosti prijetnje; i da bi, ako se ostvari, dosegnula kritičnost usluga, prag klijenata i transakcija ili geografski prag. Ostali pragovi se mogu uzeti u obzir ako banka procijeni da bi bili dosegnuti.</p>'+
+    '<p>Ozbiljnost i obaveza nisu isto. Banka je dužna odmah po saznanju obavijestiti Agenciju samo ako procijeni da je prijetnja relevantna za finansijski sektor, korisnike usluga ili klijente. Uz to, ako je primjenjivo, potencijalno ugrožene klijente treba pravovremeno obavijestiti i dati im informacije o zaštitnim mjerama.</p>'+
+    '<p class="izvor">čl. 12 Uputstva · Odluka čl. 42 st. 2 i čl. 44 st. 3 i 4</p>'+
+    '<h3>Gdje završavaju podaci</h3>'+
+    '<p>Nigdje. Alat je jedna HTML datoteka koja se izvršava u tvom pregledniku. Nema servera, baze, kolačića ni analitike; ništa se ne pohranjuje ni lokalno. Osvježavanje stranice briše sve unesene vrijednosti.</p>'+
+    '<p>Nijedna vrijednost ne napušta uređaj, a to nije stvar povjerenja nego postavke: datoteka nosi zaglavlje sigurnosne politike koje pregledniku zabranjuje bilo kakvu mrežnu konekciju. Provjeri sam — otvori razvojne alate preglednika, karticu Network, i prođi kroz cijelu procjenu. Neće se pojaviti nijedan zahtjev.</p>'+
+    '<p>Isti alat možeš preuzeti i pokrenuti bez mreže, na računaru bez internet veze. Radi identično jer mreža nikad nije ni bila potrebna.</p>'+
     '<h3>Ograničenja</h3>'+
     '<p>Ovo je pomoćna trijaža jednog incidenta, ne odluka i ne izvještaj. Ne pokriva ozbiljne cyber prijetnje iz čl. 12 Uputstva, koje imaju vlastite kriterije, ni sadržaj samih izvještaja. Kvalitativni kriteriji poput ugleda i gubitka podataka počivaju na prosudbi koju alat ne može provjeriti. Klasifikaciju potvrđuje odgovorna osoba u banci, a mjerodavan je izvorni tekst propisa.</p>'+
     '<p class="izvor">Uputstva se primjenjuju od 01.04.2026.</p>';
@@ -1150,6 +1395,14 @@ function crtajOAlatu(){
     '<h3>Where the report goes</h3>'+
     '<p>Major incidents are reported to the competent authority. For significant credit institutions supervised directly under the SSM this is the ECB; for others it is the national competent authority. The technical standards themselves are drafted by the ESAs, which do not receive the reports.</p>'+
 
+    '<h3>Cyber threats</h3>'+
+    '<p>A threat counts as significant only where all three conditions hold together: that, if materialised, it could affect critical or important functions or other entities, providers, clients and counterparts; that it has a high probability of materialising, judged on vulnerabilities, the capability and intent of threat actors, and the persistence of the threat; and that, if materialised, it would meet the criticality of services, the client and transaction threshold, or the geographical threshold. The remaining thresholds may be considered where the entity concludes they could be met.</p>'+
+    '<p>Significance and duty are separate. Notification to the competent authority is voluntary under DORA: the entity may notify where it deems the threat relevant to the financial system, service users or clients. Where applicable, potentially affected clients are to be informed of appropriate protection measures.</p>'+
+    '<p class="izvor">Art. 10 RTS 2024/1772 · DORA Art. 18(2) and 19(2)–(3)</p>'+
+    '<h3>Where the data ends up</h3>'+
+    '<p>Nowhere. The tool is a single HTML file that runs in your browser. There is no server, no database, no cookies and no analytics; nothing is stored locally either. Refreshing the page clears every value you entered.</p>'+
+    '<p>No value leaves the device, and that is not a matter of trust but of configuration: the file carries a content security policy header that forbids the browser from opening any network connection. Check it yourself — open the developer tools, the Network tab, and run through the whole assessment. Not a single request will appear.</p>'+
+    '<p>You can download the same file and run it on a machine with no internet connection at all. It behaves identically, because the network was never needed.</p>'+
     '<h3>Limitations</h3>'+
     '<p>This is a triage aid for a single incident, not a decision and not a report. It does not cover significant cyber threats, whose notification is voluntary and governed by its own criteria, nor the content of the reports themselves. Qualitative criteria such as reputational impact and data losses rest on judgement the tool cannot verify. The original legal texts prevail.</p>';
   }
@@ -1161,7 +1414,24 @@ function crtajOAlatu(){
 
 /* --------------------------- nalaz kao tekst ---------------------- */
 function nalazTekst(){
-  const r=R(),t=T(),o=ocijeni();
+  const r=R(),t=T();
+  if(nacin==="prijetnja"){
+    const q=ocijeniPrijetnju(),pr=S.pr,L=[];
+    L.push(t.nacinP.toUpperCase()+" — "+t.okvir+" "+r.oznaka); L.push("");
+    L.push(t.txtNalaz+q.naslov.toUpperCase());
+    L.push(t.txtObraz+q.pravilo+(q.ozbiljna?" · "+t.pOzbiljna:""));
+    L.push("");
+    L.push("A "+t.pA+": "+(pr.a===true?"da":"ne"));
+    L.push("B "+t.pB+": "+(pr.b===true?"da":"ne"));
+    L.push("C "+t.pC+": "+([pr.c1?t.pC1:"",pr.c2?t.pC2:"",pr.c3?t.pC3:""].filter(Boolean).join("; ")||"—"));
+    L.push("D "+t.pRel+": "+(pr.rel===true?"da":pr.rel===false?"ne":"—"));
+    L.push("");
+    L.push(q.opis);
+    if(q.ozbiljna)L.push(t.pKlijenti);
+    L.push(t.txtAnon);
+    return L.join("\n");
+  }
+  const o=ocijeni();
   const L=[pop(t.txtNaslov,{r:r.oznaka,v:r.valuta}),""];
   L.push(t.txtNalaz+(o.znacajan?t.txtDa:t.txtNe));
   L.push(t.txtObraz+o.pravilo);
@@ -1187,11 +1457,88 @@ function tost(tekst){
   tostTajmer=setTimeout(()=>el.classList.remove("vidljiv"),8000);
 }
 
+function kopirajTekst(tekst){
+  const ta=document.createElement("textarea");
+  ta.value=tekst; ta.setAttribute("readonly","readonly");
+  ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  let uspjeh=false;
+  try{uspjeh=document.execCommand("copy");}catch(_){}
+  document.body.removeChild(ta);
+  return uspjeh;
+}
+
+/* nalaz kao slika — crta se u pregledniku, ništa se ne šalje */
+function sacuvajSliku(){
+  const t=T(),r=R(),o=nacin==="prijetnja"?null:ocijeni(),q=nacin==="prijetnja"?ocijeniPrijetnju():null;
+  const W=1200,H=630,c=document.createElement("canvas");
+  c.width=W;c.height=H;
+  const x=c.getContext("2d");
+  const znacajno=o?o.znacajan:q.ozbiljna;
+  x.fillStyle="#0A0E13";x.fillRect(0,0,W,H);
+  const g=x.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,znacajno?"rgba(255,59,92,.28)":"rgba(47,216,168,.16)");
+  g.addColorStop(1,"rgba(10,14,19,0)");
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.fillStyle="#63768A";x.font="500 22px system-ui,sans-serif";
+  x.fillText((nacin==="prijetnja"?t.nacinP:t.eyebrow)+"  ·  "+r.oznaka,64,86);
+  x.fillStyle=znacajno?"#FF3B5C":"#2FD8A8";
+  x.font="400 74px Georgia,serif";
+  const naslovS=o?(o.znacajan?t.prijaviti:t.nePrijavljuje):(q.ozbiljna?t.pOzbiljna:t.pNije);
+  x.fillText(naslovS.length>34?naslovS.slice(0,33)+"…":naslovS,64,180);
+  x.fillStyle="#BAC7D4";x.font="400 26px system-ui,sans-serif";
+  x.fillText(o?(o.znacajan?t.znacajan:t.nijeZnacajan):(q.ozbiljna?t.pPravilo2:t.pPravilo1),64,226);
+  x.strokeStyle="rgba(255,255,255,.14)";x.beginPath();x.moveTo(64,262);x.lineTo(W-64,262);x.stroke();
+  x.font="400 24px system-ui,sans-serif";
+  let y=310;
+  const redovi=[];
+  if(o){
+    redovi.push((o.samostalan?"5b":o.broj+"/6")+"  ·  "+o.pravilo);
+    o.razlozi.forEach(v=>redovi.push("— "+v));
+    o.K.filter(k=>k.met).forEach(k=>redovi.push("— "+k.naziv+": "+k.detalji.join("; ")));
+  }else{
+    redovi.push(q.broj+"/3  ·  "+q.pravilo);
+    redovi.push("— "+(q.ozbiljna?t.pObaveza:t.pNema));
+  }
+  redovi.slice(0,7).forEach(v=>{
+    x.fillStyle="#BAC7D4";
+    x.fillText(v.length>92?v.slice(0,91)+"…":v,64,y); y+=40;
+  });
+  x.fillStyle="#63768A";x.font="400 20px system-ui,sans-serif";
+  x.fillText(t.txtAnon,64,H-52);
+  try{
+    const a=document.createElement("a");
+    a.href=c.toDataURL("image/png");
+    a.download="trijaza-ikt.png";
+    a.click();
+  }catch(_){}
+}
+
 /* ---------------------------- interakcija ------------------------- */
 function postavi(put,val){const d=put.split(".");if(d.length===1)S[d[0]]=val;else S[d[0]][d[1]]=val;}
 function uzmi(put){const d=put.split(".");return d.length===1?S[d[0]]:S[d[0]][d[1]];}
 
 document.addEventListener("keydown",e=>{
+  const uPolju=/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName||""));
+  /* 1–3 mijenjaju odgovore na tekućem ekranu, Enter vodi dalje */
+  if(!uPolju&&"123".includes(e.key)){
+    const i=Number(e.key)-1;
+    if(nacin==="prijetnja"){
+      if(korak===1&&i<2){const k=i===0?"a":"b";S.pr[k]=S.pr[k]===true?false:true;e.preventDefault();return crtaj();}
+      if(korak===2&&i===2){S.pr.rel=S.pr.rel===true?false:true;e.preventDefault();return crtaj();}
+    }else if(korak===1){
+      const k=["prioritetna","licencirana","pristup"][i];
+      S.gate[k]=S.gate[k]===true?false:true;
+      potvrdaPodaci=false;
+      if(!prekidVrijedi())S.v.prekidH="";
+      if(!pristupVrijedi())S.m.podaciB=false;
+      e.preventDefault(); return crtaj();
+    }
+  }
+  if(!uPolju&&e.key==="Enter"){
+    const d=document.querySelector(".nav .dalje:not([disabled])");
+    if(d){e.preventDefault();d.click();return;}
+  }
   if(e.key==="Escape"){
     const o=document.getElementById("o-alatu");
     if(o.style.display!=="none"){o.style.display="none";e.preventDefault();}
@@ -1236,10 +1583,18 @@ document.addEventListener("click",e=>{
   if(!t)return;
   if(t.dataset.zatvori!==undefined){document.getElementById("o-alatu").style.display="none";return;}
   if(t.dataset.o!==undefined)return crtajOAlatu();
-  if(t.dataset.tema!==undefined){tema=tema==="svijetla"?"tamna":"svijetla";return crtaj();}
+  if(t.dataset.nacin){nacin=t.dataset.nacin;korak=1;uporediOtvoren=false;potvrdaPodaci=false;window.scrollTo(0,0);return crtaj();}
+  if(t.dataset.uporedi!==undefined){uporediOtvoren=!uporediOtvoren;return crtaj();}
+  if(t.dataset.link!==undefined){
+    const adresa=(location.origin||"")+(location.pathname||"")+uHash();
+    const lab=t.querySelector("span")||t, star=T().link;
+    kopirajTekst(adresa)?lab.textContent=T().linkOk:lab.textContent=T().kopGreska;
+    setTimeout(()=>{lab.textContent=star;},1800);
+    return;
+  }
+  if(t.dataset.slika!==undefined){sacuvajSliku();return;}
   if(t.dataset.rez){
     S.rezim=t.dataset.rez;
-    try{history.replaceState(null,"",(location.pathname||"")+(location.search||"")+(S.rezim==="dora"?"#eu":"#fbih"));}catch(_){}
     return crtaj();
   }
   const y=t.closest("[data-yn]");
@@ -1273,24 +1628,16 @@ document.addEventListener("click",e=>{
     return;
   }
   if(t.dataset.nazad!==undefined){potvrdaPodaci=false;korak=Math.max(1,korak-1);window.scrollTo(0,0);return crtaj();}
-  if(t.dataset.reset!==undefined){const r=S.rezim;S=prazno();S.rezim=r;korak=1;potvrdaPodaci=false;window.scrollTo(0,0);return crtaj();}
+  if(t.dataset.reset!==undefined){const r=S.rezim;S=prazno();S.rezim=r;korak=1;potvrdaPodaci=false;uporediOtvoren=false;window.scrollTo(0,0);return crtaj();}
   if(t.dataset.kopiraj!==undefined){
-    const ta=document.createElement("textarea");
-    ta.value=nalazTekst();ta.setAttribute("readonly","readonly");
-    ta.style.position="fixed";ta.style.opacity="0";
-    document.body.appendChild(ta);ta.select();
-    let uspjeh=false;
-    try{uspjeh=document.execCommand("copy");}catch(_){}
-    document.body.removeChild(ta);
-    const lab=t.querySelector("span")||t;
-    lab.textContent=uspjeh?T().kopirano:T().kopGreska;
-    const vrati=T().kopiraj;
+    const lab=t.querySelector("span")||t, vrati=T().kopiraj;
+    lab.textContent=kopirajTekst(nalazTekst())?T().kopirano:T().kopGreska;
     setTimeout(()=>{lab.textContent=vrati;},1600);
     return;
   }
 });
 
-window.addEventListener("hashchange",()=>{const r=izHesa();if(r&&r!==S.rezim){S.rezim=r;crtaj();}});
+window.addEventListener("hashchange",()=>{if(izHash())crtaj();});
 crtaj();
 </script>
 </body>
