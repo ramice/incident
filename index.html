@@ -191,6 +191,9 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opac
 .rokovi-svi p span{color:var(--tx2);min-width:11em}
 .rokovi-svi p em{font-style:normal;font-family:var(--mono);color:var(--tx)}
 .rokovi-svi p i{font-style:normal;font-size:11.5px;color:var(--faint);margin-left:auto}
+.rokovi-svi p.proslo span,.rokovi-svi p.proslo em{color:var(--faint);text-decoration:line-through;
+  text-decoration-color:rgba(var(--acc-rgb),.5)}
+.rokovi-svi p.proslo i{color:var(--acc)}
 
 /* sat rokova */
 .sat-blok{border:1px solid var(--line);border-radius:16px;padding:16px 18px 12px;margin-bottom:16px;background:var(--sf1)}
@@ -590,7 +593,7 @@ bs:{
   htmlLang:"bs", naslovStr:"Je li incident značajan za prijavu? · trijaža",
   eyebrow:"IKT incident", naslov:"INCIDENT", naslovPost:"Procjena značajnosti i obaveze prijave regulatoru",
   dek:"Dva koraka: ključne usluge, pa pragovi.",
-  priv:"Ništa se ne pamti i sve se izvršava na vašem uređaju.",
+  priv:"Ništa se ne pamti i ništa ne ide s uređaja. Osvježiš stranicu i sve je obrisano — za razliku od incidenta.",
   koraci:["Ključne usluge","Pragovi","Odluka"],
   koraciP:["Uslovi","Posljedica","Odluka"],
   pNaslov1:"Domet i vjerovatnoća", pNaslov2:"Šta bi bilo ako se ostvari?",
@@ -644,6 +647,7 @@ bs:{
   rokInicijalno:"Inicijalno obavještenje", rokPrivremeni:"Privremeni statusni izvještaj", rokKonacni:"Konačni izvještaj",
   odbrojava:"do roka", odbrojavaIsteklo:"prekoračeno", rokoviSvi:"Rokovi",
   preostalo:"Preostalo vrijeme za {r}", rokIstice:"Rok ističe {d} u {v}", rokIstekao:"Rok je istekao {d} u {v}",
+  istekloR:"isteklo", osnov72:"72 h od inicijalnog obavještenja", osnovMjesec:"mjesec dana od privremenog izvještaja",
   osnovKlas:"4 h od klasifikacije", osnovOtk:"24 h od otkrivanja", osnovKasno:"4 h od klasifikacije, jer je kasnija od 24 h od otkrivanja",
   pomjerenoV:"pomjereno s vikenda na podne radnog dana",
   satRok:"Rokovi odavde", satInicijalno:"do inicijalnog obavještenja", satPrivremeni:"do privremenog izvještaja",
@@ -748,7 +752,7 @@ en:{
   htmlLang:"en", naslovStr:"Is this incident reportable? · triage",
   eyebrow:"ICT incident", naslov:"INCIDENT", naslovPost:"Materiality and the duty to report to the authority",
   dek:"Two steps: critical services, then the thresholds.",
-  priv:"Nothing is saved and nothing leaves the device.",
+  priv:"Nothing is saved and nothing leaves the device. Refresh the page and it is all gone — unlike the incident.",
   koraci:["Critical services","Thresholds","Decision"],
   koraciP:["Conditions","Consequence","Decision"],
   pNaslov1:"Reach and likelihood", pNaslov2:"What if it materialises?",
@@ -802,6 +806,7 @@ en:{
   rokInicijalno:"Initial notification", rokPrivremeni:"Intermediate report", rokKonacni:"Final report",
   odbrojava:"to the deadline", odbrojavaIsteklo:"overdue", rokoviSvi:"Deadlines",
   preostalo:"Time remaining for {r}", rokIstice:"Deadline expires {d} at {v}", rokIstekao:"Deadline expired {d} at {v}",
+  istekloR:"expired", osnov72:"72 h after the initial notification", osnovMjesec:"one month after the intermediate report",
   osnovKlas:"4 h from classification", osnovOtk:"24 h from detection", osnovKasno:"4 h from classification, as it is later than 24 h after detection",
   pomjerenoV:"moved from the weekend to noon of the next working day",
   satRok:"Deadlines from here", satInicijalno:"to the initial notification", satPrivremeni:"to the intermediate report",
@@ -1482,16 +1487,21 @@ function blokVremena(t){
       '<span class="brojac-c" data-cifre>'+esc(o.tekst)+'</span>'+
       '<span class="brojac-o" data-oznaka>'+esc(pop(o.isteklo?t.rokIstekao:t.rokIstice,{d:fmtDan(o.rok),v:fmtSatMin(o.rok)}))+'</span>'+
       '</div>';
-    const osnovT=d.kasno?t.osnovKasno:(d.osnov==="klasifikacija"?t.osnovKlas:t.osnovOtk);
-    h+='<p class="osnov-red">'+ikona(d.osnov==="otkrivanje"||d.kasno?"alarm":"sat")+'<span>'+esc(osnovT)+'</span></p>';
+    const osnovInic=d.kasno?t.osnovKasno:(d.osnov==="klasifikacija"?t.osnovKlas:t.osnovOtk);
+    const osnovTek=o.ime===t.rokInicijalno?osnovInic:(o.ime===t.rokPrivremeni?t.osnov72:t.osnovMjesec);
+    h+='<p class="osnov-red">'+ikona("sat")+'<span>'+esc(osnovTek)+'</span></p>';
+    const sada=Date.now();
     const redovi=[
-      [t.rokInicijalno,d.inicijalni,osnovT],
-      [t.rokPrivremeni,d.privremeni,"72 h"],
-      [t.rokKonacni,d.konacni,d.pomjeren?t.pomjerenoV:"+1 "+(R().jezik==="bs"?"mjesec":"month")]
+      [t.rokInicijalno,d.inicijalni,osnovInic],
+      [t.rokPrivremeni,d.privremeni,t.osnov72],
+      [t.rokKonacni,d.konacni,d.pomjeren?t.pomjerenoV:t.osnovMjesec]
     ].filter(x=>x[0]!==o.ime);
     if(t.rokoviVikend)h+='<p class="vikend-n">'+t.rokoviVikend.replace(/^<br>/,"")+'</p>';
-    h+='<div class="rokovi-svi">'+redovi.map(x=>
-      '<p><span>'+esc(x[0])+'</span><em>'+fmtDT(x[1])+'</em><i>'+esc(x[2])+'</i></p>').join("")+'</div>';
+    h+='<div class="rokovi-svi">'+redovi.map(x=>{
+      const proslo=x[1]<sada;
+      return '<p'+(proslo?' class="proslo"':"")+'><span>'+esc(x[0])+'</span><em>'+fmtDT(x[1])+'</em>'+
+        '<i>'+esc(proslo?t.istekloR:x[2])+'</i></p>';
+    }).join("")+'</div>';
   }
   return h+'</div>';
 }
